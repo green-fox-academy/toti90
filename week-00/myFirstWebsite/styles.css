@@ -1,0 +1,120 @@
+/* ALL BODY */
+
+body {
+    font-family: 'Roboto Slab', serif;
+    background-image: url(assets/background.png);
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h3 {
+    font-size: 28px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+p {
+    line-height: 30px;
+    margin-bottom: 40px;
+    margin-top:0;
+    font-size: 16px;
+    padding-left: 2%;
+    text-align: justify;
+}
+
+/* NAVIGATION BAR */
+
+header {
+    background: #333333;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo {
+    float:left;
+    padding: 10px 0;
+}
+
+nav {
+    float:right;
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 50px;
+    padding-top: 15px;
+    position: relative;
+    list-style: none;
+}
+
+nav a {
+    color: #ff0099;
+}
+
+nav a:hover {
+    color: #A00068;
+}
+
+/* TOP CONTENT*/
+#top_content {
+    margin-top: 150px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+
+#top_content h3 {
+    color: #ff0099;
+    margin-bottom: 15px;
+}
+
+#top_content p {
+    font-size: 20px;
+    padding-left: 0;
+}
+/* MIDDLE LINE IMAGE */
+#line {
+    margin: auto;
+    width: 76px;
+    padding: 10px;
+    margin-top: 65px;
+    margin-bottom: 55px;
+}
+
+#id {
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.photo {
+    float:right;
+    width: 150px;
+    padding-right: 100px;
+}
+
+
+/* MIDDLE CONTENT */
+
+#wiki h2 {
+    font-size: 40px;
+    text-align: center;
+}
