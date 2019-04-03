@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./myScript.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html">The Blog</a>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+        <h1>Add new post</h1>
+            <h2>Title</h2><br>
+            <input id="title" type="text" placeholder="Give Some Title" class="title-input"><br>
+            <h2>Content</h2><br>
+            <textarea id="textarea" rows="3" class="input" placeholder="Write some blogpost"></textarea>
+            <input id="button_1" type="button" value="Submit" class="button" onclick="doOnClick()"/>
+            <input id="button_2" type="button" value="Delete" class="button" onclick="doOnDelete()"/><br>
+    </div>
+        <h4>Posts</h4>  
+        <div class="post">
+            <img src="./assets/sems-5340_crop.png" alt="profile_picture">
+            <h3 id="h3_1">Post 1 Title</h3>
+            <h5>Posted by: Tomi</h5>
+            <p id="p_1">Post one text</p>
+        </div>
+        <div class="post">
+            <img src="./assets/sems-5340_crop.png" alt="profile_picture">
+            <h3 id="h3_2">Post 2! Title</h3>
+            <h5>Posted by: Tomi</h5>
+            <p id="p_2">Post two text</p>
+        </div>
+        <div class="post">
+            <img src="./assets/sems-5340_crop.png" alt="profile_picture">
+            <h3 id="h3_3">Post 3 Title</h3>
+            <h5>Posted by: Tomi</h5>
+            <p id="p_3">Post three text</p>
+        </div>
+
+</body>
+</html>
