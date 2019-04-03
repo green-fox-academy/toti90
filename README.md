@@ -2,7 +2,8 @@
 
 ## My Other Repositories:
 * [Fork-repository](https://github.com/toti90/git-lesson-repository)
-* [My First Website Repo](https://toti90.github.io)
+* [My First Website](https://toti90.github.io)
+* [My First website repo](https://github.com/toti90/toti90.github.io)
 
 ## Tictac important links:
 1. [Tictac-syllabus](https://github.com/green-fox-academy/tictac-syllabus)
