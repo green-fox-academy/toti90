@@ -7,9 +7,10 @@ export {};
 // Surface Area: 600
 // Volume: 1000
 
-let length: number = 5;
-let depth: number = 4;
-let height: number = 3;
+let length: number = 10;
+let depth: number = 10;
+let height: number = 10;
+
 let face1: number = length*depth;
 let face2:number = length*height;
 let face3: number = depth*height;
