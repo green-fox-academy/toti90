@@ -13,6 +13,20 @@ function substr(str: string, keyword: string) {
 }
 //  Example
 // should print: `17`
-console.log(substr("this is what I'm searching in", "searching"));
+console.log(substr2("this is what I'm searching in", "searching"));
 // should print: `-1`
-console.log(substr("this is what I'm searching in", "not"));
+console.log(substr2("this is what I'm searching in", "not"));
+
+function substr2(str: string, keyword: string) {
+    let lengthOfKey: number = keyword.length;
+    let start = -1;
+    for (let i=1;i<str.length;i++) {
+        if (str[i] === keyword[0]) {
+            for (let j = 1; j <= lengthOfKey; j++) {
+                if (str[i+j] === keyword[j] && str[i+lengthOfKey] !== undefined) {
+                    start = i;
+                } 
+            }
+        } 
+    }return start;
+}
