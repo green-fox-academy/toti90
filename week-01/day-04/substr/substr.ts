@@ -3,12 +3,13 @@
 //  Returns the starting index where the second one is starting in the first one
 //  Returns `-1` if the second string is not in the first one
 function substr(str: string, keyword: string) {
-    let indexofNumber = str.indexOf(keyword);
-    if (indexofNumber !== -1) {
-        return indexofNumber;
-    }else {
-        return "Your searched word couldn't be found in the original sentence";
-    };
+    let lengthOfKey: number = keyword.length;
+    let start = -1;
+    for (let i=1;i<str.length;i++) {
+        if (str.slice(i,i+lengthOfKey) === keyword) {
+            start = i;
+        } 
+    } return start;
 }
 //  Example
 // should print: `17`
