@@ -20,13 +20,12 @@ console.log(substr2("this is what I'm searching in", "not"));
 function substr2(str: string, keyword: string) {
     let lengthOfKey: number = keyword.length;
     let start = -1;
-    for (let i=1;i<str.length;i++) {
+    for (let i = 1; i < str.length; i++) {
         if (str[i] === keyword[0]) {
             for (let j = 1; j <= lengthOfKey; j++) {
-                if (str[i+j] === keyword[j] && str[i+lengthOfKey] !== undefined) {
+                if (str[i + j] === keyword[j] && str[i + lengthOfKey] !== undefined) {
                     start = i;
-                } 
+                }
             }
-        } 
-    }return start;
-}
+        } return start;
+    }
