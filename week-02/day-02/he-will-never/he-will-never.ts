@@ -17,6 +17,6 @@ let hashmap: any = {
   3: 'say goodbye '
 };
 
-let notSoCrypticMessage2 = notSoCrypticMessage.map(x => hashmap[x]).join("");
+out = notSoCrypticMessage.map(x => hashmap[x]).join("");
 
-console.log(notSoCrypticMessage2);
+console.log(out);
