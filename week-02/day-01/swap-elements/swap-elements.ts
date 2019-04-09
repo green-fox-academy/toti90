@@ -7,9 +7,7 @@ let abc: String[] = ["Arthur", "Boe", "Chloe"];
 
 let firstElement = abc[0];
 let thirdElement = abc[2];
-abc.pop();
-abc.shift();
-abc.splice(1, 0, firstElement);
-abc.splice(0, 0, thirdElement);
+abc[0] = thirdElement;
+abc[2] = firstElement;
 console.log(abc);
 
