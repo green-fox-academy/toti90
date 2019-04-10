@@ -29,6 +29,34 @@ const queue: FestivalGoer[] = [
 // If guns are found, remove them and put them on the watchlist (only the names)
 // If alcohol is found confiscate it (set it to zero and add it to securityAlcholLoot) and let them enter the festival
 
+function queueAlcohol(list:any[]) {
+    for (let i=0; i<list.length;i++) {
+        for (let j = 1; j<list.length; j++) {
+            if (list[j].alcohol < list[j-1].alcohol) {
+                let element = list[j]
+                list[j] = list[j-1]
+                list[j-1] = element
+            } else if (list[j].alcohol === list[j-1].alcohol && list[j].guns < list[j-1].guns) {
+                let element = list[j]
+                list[j] = list[j-1]
+                list[j-1] = element
+            }
+        }
+    } return list;
+}
+
+// function queueGun(list:any[]) {
+//     for (let i=0; i<list.length;i++) {
+//         for (let j = 1; j<list.length; j++) {
+//             if (list[j].guns < list[j-1].guns) {
+//                 let element = list[j]
+//                 list[j] = list[j-1]
+//                 list[j-1] = element
+//             }
+//         }
+//     } return list;
+// }
+
 function securityCheck(list:any[]) {
     let entries: any[] = [];
     list.filter(x => (x.alcohol === 0 && x.guns === 0) ? entries.push(x.name):"");
@@ -37,5 +65,5 @@ function securityCheck(list:any[]) {
     return `${entries} can go inside\n${watchlist} bring a gun to festival\n${securityAlcoholLoot} l alcohol were collected`
 }
 
-
+console.log(queueAlcohol(queue));
 console.log(securityCheck(queue));
