@@ -12,7 +12,7 @@ export{};
 let shoppingList = ["eggs", "milk", "fish", "apples", "bread", "chicken"];
 
 function shop(item:any, list: string[]){
-    return shoppingList.indexOf(item) !== -1 ? `${item} is in the list`: `no ${item} in the list`
+    return list.indexOf(item) !== -1 ? `${item} is in the list`: `no ${item} in the list`
 }
 
 console.log(shop("eggs", shoppingList));
