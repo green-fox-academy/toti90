@@ -9,6 +9,8 @@ function sierpinsky(x: number, y: number, size: number) {
   if (size < 1) {
     return
   }
+  ctx.beginPath()
+  ctx.fillStyle = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
   ctx.fillRect(x + size, y + size, size, size);
   const position_1 = { x: x, y: y };
   const position_2 = { x: x + size, y: y };

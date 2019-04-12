@@ -9,6 +9,8 @@ function squareEmpty(x: number, y: number, size: number) {
   if (size < 14) {
     return
   }
+  ctx.beginPath()
+  ctx.strokeStyle = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
   ctx.lineWidth = Math.floor(size / 15);
   ctx.strokeRect(x + size / 2, y + size / 2, size, size);
   ctx.stroke();

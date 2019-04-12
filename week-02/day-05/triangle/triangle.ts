@@ -9,6 +9,8 @@ function trinagle(x: number, y: number, size: number): void {
   if (size < 8) {
     return
   }
+  ctx.beginPath()
+  ctx.strokeStyle = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
   ctx.moveTo(x, y);
   ctx.lineTo(x + size, y);
   ctx.lineTo(x + size / 2, y + size);

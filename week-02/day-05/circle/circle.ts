@@ -10,6 +10,7 @@ function circle(x:number,y:number,size:number):void {
     return
   }
   ctx.beginPath();
+  ctx.strokeStyle = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
   ctx.arc(x,y,size,0,Math.PI*2)
   ctx.stroke()
   const position_1 = {x:x,y:y-size/2}
