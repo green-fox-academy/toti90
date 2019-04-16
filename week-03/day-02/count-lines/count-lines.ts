@@ -16,8 +16,8 @@ function countLines(fileName: string) {
   }
   catch (e) {
     let newError = new Error("0")
-    console.log(newError.message)
+    console.log(parseInt(newError.message))
   }
 }
 
-countLines("myFile.txt")
+countLines("myFilee.txt")
