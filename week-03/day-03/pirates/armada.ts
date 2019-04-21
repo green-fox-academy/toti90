@@ -1,55 +1,43 @@
 `use strict`
-export{}
+export { }
 
 import { Pirate } from "./pirate";
 import { Ship } from "./ship";
 
 class Armada {
-  fleet: Ship[] = [];
+  fleet: Ship[] = []; //Generate fleet with ships
 
-
+  //fill armada with random number (1-5) of ships
   fillArmada() {
-    let number = Math.floor(Math.random()*5+1)
-    let ships:Ship[] = []
-    for (let i=0;i<number;i++){
-      let ship = new Ship()
-      ship.fillShip()
-      ships.push(ship)
+    let number = Math.floor(Math.random() * 5 + 1);
+    let ships: Ship[] = [];
+    for (let i = 0; i < number; i++) {
+      let ship = new Ship();
+      ship.fillShip(); //Use fillShip method from ship.ts
+      ships.push(ship);
     }
-    this.fleet = ships
+    this.fleet = ships;
   }
 
+  //Battle between two armada
   war(other: Armada): boolean {
-    let thisFleet = this.fleet
-    console.log(`this fleet: ${thisFleet}`);
-    let otherFleet = other.fleet
-    console.log(`other fleet: ${otherFleet}`);
-    console.log(`----------`)
-    let firstShip = 0
-    let secondShip = 0
+    let thisFleet = this.fleet;
+    let otherFleet = other.fleet;
+    let firstShip = 0;
+    let secondShip = 0;
+    //Do battle until one of the armada use last ship
     while (firstShip !== thisFleet.length && secondShip !== otherFleet.length) {
-      console.log(`firstShip start of iteration: ${firstShip}, and this fleet lenght is: ${thisFleet.length}`)
-      console.log(`secondShip start of iteration: ${secondShip}, and other fleet length is: ${otherFleet.length}`)
-      console.log(`lenght of this fleet ${firstShip}th ship: ${thisFleet[firstShip].crew.length}`)
-      console.log(`lenght of other fleet ${secondShip}th ship: ${otherFleet[secondShip].crew.length}`)
       if (thisFleet[firstShip].battle(otherFleet[secondShip])) {
-        console.log(` number of person in second after battle ${otherFleet[secondShip].crew.length}`)
-        console.log(`this fleet win`)
-        console.log(`----------`)
-        secondShip++
+        secondShip++;
       } else {
-        console.log(` number of person in first ship after battle ${thisFleet[firstShip].crew.length}`)
-        console.log(`other fleet win`)
-        console.log(`----------`)
-        firstShip++
+        firstShip++;
       }
-    } 
-    console.log(`firstShip end of iteration: ${firstShip}`)
-    console.log(`firstShip end of iteration: ${secondShip}`)
+    }
+    //Generate return value, if this aramada win then true, else false
     if (thisFleet.length === firstShip) {
-      return false
+      return false;
     } else {
-      return true
+      return true;
     }
   }
 
