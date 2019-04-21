@@ -36,7 +36,7 @@ export class Ship {
     let win = true;
     let score1 = this.crew.length - this.crew[0].drunk
     let score2 = otherShip.crew.length - otherShip.crew[0].drunk
-    let winnerShip:Pirate[]
+    let winnerShip: Pirate[]
     let looserShip: Pirate[]
     if (score1 > score2) {
       winnerShip = this.crew
@@ -46,15 +46,17 @@ export class Ship {
       looserShip = this.crew
       win=false
     }
-    
     let numberOfDeath = Math.floor(Math.random()*looserShip.length)
-    for (let i=0;i<numberOfDeath;i++) {
+    win ? otherShip.numberOfLivePireate -= numberOfDeath: this.numberOfLivePireate -= numberOfDeath
+    
+    
+    for (let i=1;i<=numberOfDeath;i++) {
       looserShip[i].die()
-      looserShip.splice(i,1)
     }
+    looserShip.splice(1,numberOfDeath)
     let numberOfRums = Math.floor(Math.random()*10)
     while (numberOfRums !== 0) {
-      let randomPersonIndex = Math.floor(Math.random()*(winnerShip.length+1))
+      let randomPersonIndex = Math.floor(Math.random()*(winnerShip.length))
       winnerShip[randomPersonIndex].drinkSomeRum()
       numberOfRums--
     }
@@ -63,16 +65,17 @@ export class Ship {
 
 }
 
-let ship1 = new Ship()
-let ship2 = new Ship()
-console.log(ship1.crew)
-console.log(ship2.crew)
-ship1.fillShip()
-ship2.fillShip()
-console.log(ship1.crew)
-console.log(ship2.crew)
-console.log(ship1.battle(ship2))
-console.log(ship1.crew)
-console.log(ship2.crew)
+// ----- TEST ------
+// let ship1 = new Ship()
+// let ship2 = new Ship()
+// console.log(ship1.crew)
+// console.log(ship2.crew)
+// ship1.fillShip()
+// ship2.fillShip()
+// console.log(ship1.crew)
+// console.log(ship2.crew)
+// console.log(ship1.battle(ship2))
+// console.log(ship1.crew)
+// console.log(ship2.crew)
 
 

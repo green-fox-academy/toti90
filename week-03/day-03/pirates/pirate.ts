@@ -44,6 +44,7 @@ export class Pirate {
 
 }
 
+// ----- TEST ------
 // let pirate1 = new Pirate()
 // let pirate2 = new Pirate()
 // console.log(`Pirate 1 after initialization: ${pirate1.howItGoingMate()}`) 
