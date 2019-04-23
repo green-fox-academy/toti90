@@ -9,10 +9,13 @@ export class Flower extends Plant {
   }
 
   watering(amount:number) {
-    super.watering(amount)
-    if (this.water > 4) {
-      this.isNeedWater = false
-    }
+    let useAmount = amount*0.75
+    if (this.water < 5) {
+      super.watering(useAmount)
+      if(this.water > 4) {
+        this.isNeedWater = false
+      }
+    } 
   }
 }
 

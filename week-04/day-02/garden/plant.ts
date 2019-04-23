@@ -18,6 +18,6 @@ export class Plant {
   }
 
   printInfo() {
-    console.log(this.isNeedWater ? `The ${this.color} ${this.type} needs water`:`The ${this.color} ${this.type} doesnt needs water`)
+    console.log(this.isNeedWater ? `The ${this.color} ${this.type} needs water (amount of water: ${this.water})`:`The ${this.color} ${this.type} doesnt needs water (amount of water: ${this.water})`)
   }
 }

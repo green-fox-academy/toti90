@@ -9,9 +9,12 @@ export class Tree extends Plant {
   }
 
   watering(amount:number) {
-    super.watering(amount)
-    if (this.water > 9) {
-      this.isNeedWater = false
+    let useAmount = amount*0.4
+    if (this.water < 10) {
+      super.watering(useAmount)
+      if(this.water > 9) {
+        this.isNeedWater = false
+      }
     }
   }
 }
