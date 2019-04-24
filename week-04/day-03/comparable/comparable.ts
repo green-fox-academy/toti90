@@ -9,7 +9,11 @@ export interface Comparable {
   */
 }
 
-class Domino implements Comparable {
+export interface Printable {
+  printAllFields():void;
+}
+
+class Domino implements Comparable, Printable {
   values: number[] = [];
   constructor(valueA: number, valueB: number) {
       this.values = [valueA, valueB];
@@ -33,6 +37,11 @@ class Domino implements Comparable {
     }
   }
 
+  printAllFields() {
+    console.log(this.getValue())
+  }
+
+
 }
 
 let dominoes: Domino[] = [];
@@ -43,9 +52,15 @@ dominoes.push(new Domino(6, 7));
 dominoes.push(new Domino(2, 4));
 dominoes.push(new Domino(7, 1));
 
-let result = dominoes.sort(function (a: Domino , b: Domino): number {
+for (let domino of dominoes) {
+  domino.printAllFields();
+}
+
+dominoes.sort(function (a: Domino , b: Domino): number {
   return a.compareTo(b);
 });
+
+
 
 
 

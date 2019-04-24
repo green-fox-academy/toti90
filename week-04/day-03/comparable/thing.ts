@@ -1,8 +1,8 @@
 `use strict`
 
-import { Comparable } from './comparable'
+import { Comparable, Printable } from './comparable'
 
-class Thing implements Comparable {
+class Thing implements Comparable, Printable {
   private name: string;
   private completed: boolean = false;
 
@@ -39,6 +39,10 @@ class Thing implements Comparable {
     }
   }
 
+  printAllFields() {
+    console.log(this.name)
+  }
+
 }
 
 export { Thing };
@@ -57,4 +61,7 @@ let result = [l1, l2, l3, l4, l5].sort(function (a: Thing, b: Thing): number {
   return a.compareTo(b);
 });
 
-console.log(result)
+for (let todo of [l1, l2, l3, l4, l5]) {
+  todo.printAllFields();
+}
+
