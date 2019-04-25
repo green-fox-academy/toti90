@@ -12,13 +12,15 @@ export class CowsAndBulls {
   }
 
   guess(playerGuess: number): string {
-    if(playerGuess.toString().length !== 4 || (isNaN(playerGuess))) {
-      return 'Please guess a 4 digit number'
+    let guessString: string = playerGuess.toString()
+    
+    if(playerGuess.toString().length !== 4 || (isNaN(playerGuess)) ||  new Set(guessString.split("")).size !== 4){
+      return 'Please guess a 4 DIFFERENT digit number'
     }
     if (!this.isPlaying) {
       return `You havent got more round. You lost the game`
     }
-    let guessString: string = playerGuess.toString()
+    
     let answerString: string = this.answer.toString()
     let cows: number = 0;
     let bulls: number = 0;
