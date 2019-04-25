@@ -3,11 +3,11 @@
 import math from "mathjs";
 
 export function add(a: number, b: number): number {
-  return a+b;
+  return a + b;
 }
 
 export function maxOfThree(a: number, b: number, c: number): number {
-  return Math.max(a,b,c)
+  return Math.max(a, b, c)
 };
 
 export function median(pool: number[]): number {
