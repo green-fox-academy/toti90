@@ -12,5 +12,8 @@
     "@types/tape": "^4.2.33",
     "tape": "^4.10.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/mathjs": "^5.0.1",
+    "mathjs": "^5.9.0"
+  }
 }
