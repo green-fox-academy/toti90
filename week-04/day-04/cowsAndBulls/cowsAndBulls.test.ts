@@ -26,3 +26,10 @@ test('Try loosing game after 8 guess', function (t: any): any {
   t.equal(game.guess(7296), `You havent got more round. You lost the game`)
   t.end();
 });
+
+test('Guess with not a four digit number', function (t: any): any {
+  let game = new CowsAndBulls(7624)
+  t.equal(game.guess(729), 'Please guess a 4 long number')
+  t.equal(game.guess(729222), 'Please guess a 4 long number')
+  t.end();
+});

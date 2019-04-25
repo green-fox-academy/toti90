@@ -12,6 +12,9 @@ export class CowsAndBulls {
   }
 
   guess(playerGuess: number): string {
+    if(playerGuess.toString().length !== 4) {
+      return 'Please guess a 4 long number'
+    }
     if (!this.isPlaying) {
       return `You havent got more round. You lost the game`
     }
