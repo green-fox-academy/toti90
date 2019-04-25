@@ -5,10 +5,25 @@ export class CowsAndBulls {
   public isPlaying: boolean;
   public numberOfGuesses: number;
 
-  constructor(pAnswer:number) {
+  constructor(pAnswer: number) {
     this.answer = pAnswer;
     this.isPlaying = true;
     this.numberOfGuesses = 0;
+  }
+
+  guess(playerGuess: number): string {
+    let guessString: string = playerGuess.toString()
+    let answerString: string = this.answer.toString()
+    let cows: number = 0;
+    let bulls: number = 0;
+    for (let i: number = 0; i < answerString.length; i++) {
+      if (guessString[i] === answerString[i]) {
+        cows++
+      } else if (answerString.indexOf(guessString[i]) !== -1) {
+        bulls++
+      }
+    }
+    return `${cows} cow,${bulls} bull`
   }
 
 }
