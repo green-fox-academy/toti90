@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/tape": "^4.2.33",
     "tape": "^4.10.1"
-  }
+  },
+  "dependencies": {}
 }
