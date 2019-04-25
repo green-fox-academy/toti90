@@ -1,9 +1,14 @@
 `use strict`
-
-
 import { CowsAndBulls } from './cowsAndBulls'
+
+//Generate readline sync
 const inputReader = require('readline-sync');
+
+//Do you want a random number?
 let isRandom = inputReader.question("Do you want random number? Y/N ");
+
+//If random number, then generate the instances of class until there is a 4 different digit number
+//If not random, then generate the instance with the given number
 if (isRandom === "Y" || isRandom === "y") {
   do { var game = new CowsAndBulls() }
   while (new Set(game.answer.toString().split("")).size !== 4)
@@ -12,7 +17,10 @@ if (isRandom === "Y" || isRandom === "y") {
   var game = new CowsAndBulls(answerNumber)
 }
 
+
 let userNumber: number
+
+//do the loop, where you ask a number and give the result back from guess method until you dont loose or win
 while (game.isPlaying) {
   userNumber = inputReader.question("Please guess a four different number digit: ");
   console.log(`-----------`)
