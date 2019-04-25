@@ -12,6 +12,9 @@ export class CowsAndBulls {
   }
 
   guess(playerGuess: number): string {
+    if (!this.isPlaying) {
+      return `You havent got more round. You lost the game`
+    }
     let guessString: string = playerGuess.toString()
     let answerString: string = this.answer.toString()
     let cows: number = 0;
@@ -23,6 +26,10 @@ export class CowsAndBulls {
         bulls++
       }
     }
+    if (this.numberOfGuesses === 7) {
+      this.isPlaying = false
+    }
+    this.numberOfGuesses++
     return `${cows} cow,${bulls} bull`
   }
 

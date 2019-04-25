@@ -17,3 +17,12 @@ test('Try 7624 as answer and 7296 as guess', function (t: any): any {
   t.equal(game.guess(7296), "1 cow,2 bull")
   t.end();
 });
+
+test('Try loosing game after 8 guess', function (t: any): any {
+  let game = new CowsAndBulls(7624)
+  for (let i=0;i<8;i++) {
+    game.guess(7296)
+  }
+  t.equal(game.guess(7296), `You havent got more round. You lost the game`)
+  t.end();
+});
