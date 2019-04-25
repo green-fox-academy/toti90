@@ -14,10 +14,11 @@ export class CowsAndBulls {
   //make a guess function where user can guess and get answer back as a string
   guess(playerGuess: number): string {
     let guessString: string = playerGuess.toString() //convert user number guess to string
-    
+
     //Check if the guessNumber is not 4 digit long, contain a not number character or contain two or more same digit
-    if (playerGuess.toString().length !== 4 || isNaN(playerGuess) || new Set(guessString.split("")).size !== 4) {
-      return 'Please guess a 4 DIFFERENT digit number'
+    //And bigger than 0
+    if (playerGuess.toString().length !== 4 || isNaN(playerGuess) || new Set(guessString.split("")).size !== 4 || playerGuess<0) {
+      return 'Please guess a 4 DIFFERENT digit positive number'
     }
 
     //Check iSPlaying boolen if that is true or not?
