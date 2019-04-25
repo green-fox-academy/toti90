@@ -12,8 +12,8 @@ export class CowsAndBulls {
   }
 
   guess(playerGuess: number): string {
-    if(playerGuess.toString().length !== 4) {
-      return 'Please guess a 4 long number'
+    if(playerGuess.toString().length !== 4 || (isNaN(playerGuess))) {
+      return 'Please guess a 4 digit number'
     }
     if (!this.isPlaying) {
       return `You havent got more round. You lost the game`
@@ -40,14 +40,4 @@ export class CowsAndBulls {
     return `${cows} cow,${bulls} bull`
   }
 
-}
-let game = new CowsAndBulls(3462)
-const inputReader = require('readline-sync');
-let userNumber:number
-while (game.isPlaying) {
-  userNumber = inputReader.question("Please guess a four number digit: ");
-  console.log(`Round ${game.numberOfGuesses}\nYour number: ${userNumber}\nYour result is: ${game.guess(userNumber)}`);
-}
-if (game.numberOfGuesses === 9) {
-  console.log("You lost, you havent got more round")
 }
