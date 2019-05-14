@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: red;
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+header {
+  background-color: purple;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+}
+
+li {
+  list-style: none;
+  height: 40px;
+  width: 100px;
+  background-color: aqua;
+  margin-left: 10px;
+}
+
+.content {
+  display: flex;
+  height: 90%;
+}
+
+.left {
+  background-color: yellow;
+  flex-grow: 10;
+}
+
+.right {
+  background-color: green;
+  flex-grow: 3;
+}
+
+
