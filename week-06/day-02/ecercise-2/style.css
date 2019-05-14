@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+  width: 800px;
+  height: 300px;
+}
+
+.purple {
+  background-color: purple;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+
+

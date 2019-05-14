@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  background-color: yellow;
+  width: 100%;
+  height: 300px;
+  
+}
+
+.item {
+  background-color: purple;
+  width: 100px;
+  height: 100px;
+  list-style: none;
+  margin-right: 10px;
+}
+
+
