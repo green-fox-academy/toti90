@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: white;
+  width: 90%;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top {
+  height: 45%;
+  width: 100%;
+  background-color: red;
+  margin-bottom: auto;
+}
+
+.bottom {
+  height: 49.5%;
+  width: 100%;
+  background-color: yellow;
+  top:1%
+}

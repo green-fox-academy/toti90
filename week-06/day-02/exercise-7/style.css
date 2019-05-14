@@ -40,40 +40,39 @@ li {
 
 .topcontent {
   display: flex;
+  justify-content: space-between;
   height: 49.5%;
 }
 
 .left {
   background-color: green;
-  flex-grow: 1;
-  margin-right: 1%;
+  width: 46%;
 }
 
 .right {
   background-color: green;
-  flex-grow: 1;
+  width: 46%;
 }
 .bottomcontent {
   display: flex;
+  justify-content: space-between;
   height: 49.5%;
   margin-top: 1%;
 }
 
 .bottomleft {
   background-color: green;
-  width: 49.5%;
-  margin-right: 1%;
+  width: 46%;
 }
 
 .bottommiddle {
   background-color: green;
-  width: 24.25%;
-  margin-right: 1%;
+  width: 21%;
 }
 
 .bottomright {
   background-color: green;
-  width: 24.25%;
+  width: 21%;
 }
 
 footer {
