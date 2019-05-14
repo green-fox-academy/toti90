@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: red;
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+header {
+  background-color: purple;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul {
+  display: flex;
+}
+
+.navigation {
+  list-style: none;
+  height: 40px;
+  width: 100px;
+  background-color: aqua;
+  margin-left: 20px;
+}
+
+.navigationright > li{
+  width: 40px;
+  margin-right: 20px;
+  margin-left: 0;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+}
+
+.article {
+  margin: 20px;
+}
+
+p {
+  margin-top: 20px;
+}
+
+.left {
+  background-color: yellow;
+  width: auto;
+}
+
+.boxcontainer {
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right {
+  background-color: green;
+  min-width: 300px;
+}
+
+.redbox {
+  width: 21.25%;
+  height: 100px;
+  background-color: red;
+  list-style: none;
+
+}
+
+.bottomarticle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomarticle > div {
+  width: 45%;
+}
+
+.purplecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.purplebox {
+  width: 260px;
+  height: 40px;
+  margin-top: 20px;
+  background-color: purple;
+  list-style: none;
+}
+
+.rightarticle {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.rightarticle > div {
+  margin-top: 20px;
+}
+
