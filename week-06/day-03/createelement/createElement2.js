@@ -39,7 +39,6 @@ const planetData = [
       var li = document.createElement('li')
       li.setAttribute('class', planetData[i].category)
       li.innerHTML = planetData[i].content
-      console.log(li.className)
       ul.appendChild(li)
     }
   }
