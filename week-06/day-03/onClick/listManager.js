@@ -17,84 +17,117 @@ for (let i=0;i<3;i++) {
   document.body.appendChild(table)
 }
 let tables = document.querySelectorAll('table')
-let elements = ["Bread", "Milk", "Orange", "Tomato"]
+let elements = ["Bread", "Milk", "Orange", "Tomato", "Pearl", "Ham"]
 let buttons = ["Up", ">", "X", "Down"]
 let selected = 0;
-for (let i=0;i<elements.length;i++) {
-  for (let j = 0; j<3;j++) {
-    let row = document.createElement('tr')
-    let rowContent = document.createElement('td')
-    if (j === 0) {
-      rowContent.innerHTML = elements[i]
-      row.appendChild(rowContent)
-      tables[0].appendChild(row)
-      if (i === selected) {
-        rowContent.setAttribute('class', 'selected')
-      }
-    }
-    else if (j === 2) {
-      rowContent.innerHTML = ""
-      row.appendChild(rowContent)
-      tables[2].appendChild(row)
-    
-    } else {
-      let button = document.createElement('button')
-      button.innerHTML = buttons[i]
-      rowContent.appendChild(button)
-      row.appendChild(rowContent)
-      tables[1].appendChild(row)
+let leftAmount = elements.length-1
+let amountRightTable=0
+
+//Fill Tables
+
+fillTable(0, elements)
+fillTable(1,buttons,true)
+fillTable(2," ".repeat(elements.length-1).split(" "))
+
+//functions
+
+function fillTable(tableIndex, contents, button, deleted) {
+  if (button === true) {
+    for (let x of contents) {
+      tables[tableIndex].appendChild(makeRow(x,true))
     }
   }
+  else {
+    for (let x of contents) {
+      tables[tableIndex].appendChild(makeRow(x))
+    }
+    if (tableIndex === 0 && !deleted) {
+      selectRow(selected)
+    }
+  }
+  
 }
-let leftAmount = 3
+
+
+function makeRow(content, button) {
+  let row = document.createElement('tr')
+  let rowContent = document.createElement('td')
+  if (button === true) {
+    let button = document.createElement('button')
+    button.innerHTML = content
+    rowContent.appendChild(button)
+    row.appendChild(rowContent)
+  } else {
+    rowContent.innerHTML = content
+    row.appendChild(rowContent)
+  }
+  return row
+}
+
+function selectRow(selectRow) {
+  document.querySelectorAll('table')[0].querySelectorAll('td')[selectRow].setAttribute('class', 'selected')
+}
+
+function unselectRow(selectRow) {
+  document.querySelectorAll('table')[0].querySelectorAll('td')[selectRow].removeAttribute('class')
+}
+
+function deleteRow(deleteRow) {
+  let selElement = document.querySelectorAll('table')[0].querySelectorAll('tr')[deleteRow]
+  document.querySelectorAll('table')[0].removeChild(selElement)
+}
+
+//Buttons
 let buttonDown = document.querySelectorAll('button')[3]
 buttonDown.onclick = () => {
   if (selected < leftAmount) {
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].removeAttribute('class')
+    unselectRow(selected)
     selected++
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].setAttribute('class', 'selected')
+    selectRow(selected)
   }
 };
 
 let buttonUp = document.querySelectorAll('button')[0]
 buttonUp.onclick = () => {
   if (selected > 0) {
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].removeAttribute('class')
+    unselectRow(selected)
     selected--
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].setAttribute('class', 'selected')
+    selectRow(selected)
   }
 };
 
 let buttonDelete = document.querySelectorAll('button')[2]
 buttonDelete.onclick = () => {
-  let selElement = document.querySelectorAll('table')[0].querySelectorAll('tr')[selected]
-  document.querySelectorAll('table')[0].removeChild(selElement)
-  let row = document.createElement('tr')
-  let rowContent = document.createElement('td')
-  rowContent.innerHTML = ""
-  row.appendChild(rowContent)
-  tables[0].appendChild(row)
+  if (leftAmount === -1) {
+    alert('you deleted/moved everything from original list')
+    return
+  }
+  unselectRow(selected)
+  deleteRow(selected)
+  fillTable(0,[""], false, true)
   selected = 0
   leftAmount--
   if (leftAmount > -1) {
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].setAttribute('class', 'selected')
+    selectRow(selected)
   }
 };
-let amountRightTable=0
+
 let buttonRight = document.querySelectorAll('button')[1]
 buttonRight.onclick = () => {
+  if (leftAmount === -1) {
+    alert('you deleted/moved everything from original list')
+    return
+  }
+  unselectRow(selected)
   let selElement = document.querySelectorAll('table')[0].querySelectorAll('tr')[selected]
   document.querySelectorAll('table')[2].querySelectorAll('td')[amountRightTable].innerHTML = selElement.querySelector('td').innerHTML
-  document.querySelectorAll('table')[0].removeChild(selElement)
-  let row = document.createElement('tr')
-  let rowContent = document.createElement('td')
-  rowContent.innerHTML = ""
-  row.appendChild(rowContent)
-  tables[0].appendChild(row)
+  deleteRow(selected)
+  fillTable(0,[""], false, true)
   selected = 0;
   leftAmount--
   if (leftAmount > -1) {
-    document.querySelectorAll('table')[0].querySelectorAll('td')[selected].setAttribute('class', 'selected')
+    selectRow(selected)
   }
   amountRightTable++
 };
+
