@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="/assets/weather.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+</head>
+
+<body>
+  <div class="mainD">
+      <h1 class="cityName"><%=city.city%></h1>
+      <% (city.weather).forEach(day => { %>
+        <div class="detail">
+          <div><img src="/assets/<%=day.icon%>.png" class="img" alt="<%=day.icon%>"></div>
+          <div class="tempD"><%=day.temp%> °C</div>
+          <div class="message"><%=day.message%></div>
+        </div>
+      <% }) %>
+  </div>
+</body>
+
+</html>
