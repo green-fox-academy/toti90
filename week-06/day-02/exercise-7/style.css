@@ -36,43 +36,53 @@ li {
   margin-bottom: 1%;
   padding-top:90px;
   flex-flow: column;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .topcontent {
   display: flex;
-  justify-content: space-between;
-  height: 49.5%;
+  height: 49%;
+  width: 100%;
 }
 
 .left {
   background-color: green;
-  width: 46%;
+  width: 49%;
+  margin-right: 2%;
 }
 
 .right {
   background-color: green;
-  width: 46%;
+  width: 49%;
 }
 .bottomcontent {
   display: flex;
-  justify-content: space-between;
-  height: 49.5%;
-  margin-top: 1%;
+  height: 49%;
+  width: 100%;
 }
 
 .bottomleft {
   background-color: green;
-  width: 46%;
+  width: 49%;
+  margin-right: 2%;
 }
 
 .bottommiddle {
   background-color: green;
-  width: 21%;
+  width: 23.5%;
+  margin-right: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bottomright {
   background-color: green;
-  width: 21%;
+  width: 23.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
@@ -88,13 +98,6 @@ footer {
 p {
   margin-top: 20px;
   line-height: 30px;
-}
-
-.boxcontainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 .redbox {

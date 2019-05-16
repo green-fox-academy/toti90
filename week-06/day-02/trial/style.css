@@ -16,12 +16,10 @@
   height: 45%;
   width: 100%;
   background-color: red;
-  margin-bottom: auto;
 }
 
 .bottom {
-  height: 49.5%;
+  height: 45%;
   width: 100%;
   background-color: yellow;
-  top:1%
 }
