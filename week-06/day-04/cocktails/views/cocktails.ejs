@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/assets/cocktails.css">
+  </head>
+  <body>
+    <div>
+    <h1>Cocktails</h1>
+    </div>
+    <div>
+      <button>all</button>
+      <% alcoholList.forEach(alcohol => { %>
+      <button><%= alcohol %></button>
+      <%}) %>
+    </div>
+    <table>
+      <% cocktails.forEach(cocktail => { %>
+      <tr>
+        <td><%= cocktail.name %></td>
+        <td><%= cocktail.price %></td>
+      </tr>
+      <%}) %>
+    </table>
+  </body>
+  </html>
+  
