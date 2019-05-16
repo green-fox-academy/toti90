@@ -47,6 +47,7 @@ function filter(alcohol, drinks) {
   result = []
   for (let drink of drinks) {
     if (drink['contains'].indexOf(alcohol) !== -1) {
+      drink['contains'].join("")
       result.push(drink)
     }
   }
@@ -66,3 +67,7 @@ const cocktails = [
 
 const alcoholList = ['gin', 'vodka', 'rum', 'tequila'];
 
+// const button = document.querySelector('.all');
+// button.onclick = () => {
+//     alert('hello')
+//   };
