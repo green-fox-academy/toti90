@@ -24,6 +24,14 @@ img {
   width: 800px;
   height: 450px;
 }
+.picture {
+  position: relative;
+}
+
+.nextImage{
+  position: absolute;
+  top:0px;
+}
 
 button {
   height: 450px;
@@ -45,7 +53,7 @@ button {
 }
 
 .btn:hover {
-  width: 40%;
+  width: 50%;
 }
 
 .picture {

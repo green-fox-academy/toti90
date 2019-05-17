@@ -3,6 +3,8 @@ const nextBtn = document.querySelector('#nextBtn');
 const image = document.querySelector('.image')
 const imageHthree = document.querySelector('h3')
 const thumbnailImages = document.querySelectorAll('.thumbImg')
+const main = document.querySelector('.main')
+const slideShow = document.querySelector('.slideshow')
 
 let images = [1,2,3,4,5]
 let currentImage = 1
