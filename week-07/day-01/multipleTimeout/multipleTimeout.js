@@ -9,10 +9,10 @@
 function writeWord(array, time) {
   for (let i=0; i<array.length; i++) {
     setTimeout(function(){
-      console.log(array[i])
+      console.log(array[i]);
     }, time[i]);
 
   }
 }
 
-writeWord(['apple', 'pear', 'melon', 'grapes'],[0,1000,3000,5000])
+writeWord(['apple', 'pear', 'melon', 'grapes'],[0,1000,3000,5000]);
