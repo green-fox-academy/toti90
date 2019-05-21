@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bomb defuse</title>
+</head>
+
+<body>
+  <h1>Defuse all</h1>
+  <div class="display">10</div>
+  <div class="buttons">
+  </div>
+</body>
+<script>
+  const display = document.querySelector('.display');
+  let buttonsDiv = document.querySelector('.buttons');
+
+  for (let i=1;i<11;i++) {
+    let button = document.createElement('button')
+    button.innerHTML = 'Defuse'
+    button.setAttribute('id', i.toString())
+    button.style.position = 'absolute'
+    button.style.top = `${100+Math.floor(Math.random()*700)}px`
+    button.style.left = `${10+Math.floor(Math.random()*1200)}px`
+    buttonsDiv.appendChild(button)
+  }
+  const buttons = document.querySelectorAll('button');
+  let currentTime = 9;
+  const timeout = setTimeout(function () {
+    display.innerHTML = 'Bomb exploded';
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true
+      }
+  }, 10000);
+  let defused = 0;
+  // button[0].onclick = () => {
+
+  // }
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function (event) {
+      if (defused === 9) {
+        clearTimeout(timeout);
+        clearInterval(interval);
+        display.innerHTML = `Bomb defused, ${currentTime} s remained`;
+        buttons[i].disabled = true;
+      } else {
+        buttons[i].disabled = true;
+        defused++
+        console.log(defused)
+      }
+    });
+  }
+
+  const interval = setInterval(function () {
+    display.innerHTML = currentTime.toString();
+    currentTime--;
+    if (currentTime === 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+
+
+
+
+    // Create a timeout that will set the display to "Bomb exploded" in 10 seconds
+    // If you click on the button set the display to "Bomb defused" and stop the timeout
+    // Extra: create an interval which will update the remaining seconds in the display
+</script>
+
+</html>
