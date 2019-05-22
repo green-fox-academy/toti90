@@ -23,16 +23,11 @@ body {
 img {
   width: 800px;
   height: 450px;
+  position: relative;
 }
 .picture {
   position: relative;
 }
-
-.nextImage{
-  position: absolute;
-  top:0px;
-}
-
 button {
   height: 450px;
   width: 50px;
