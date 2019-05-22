@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const PORT = 3000;
+const PORT = 3001;
 app.use(bodyParser.json())
 //app.use(bodyParser.urlencoded({extended:true}))
 
@@ -80,9 +80,8 @@ app.get('/greeter', (req, res) => {
   res.send(result);
 });
 
-app.get('/appenda/:text', (req, res) => {
+app.get('/appenda/:text?', (req, res) => {
   let text = req.params.text
-  console.log(text)
   let result;
   if (text !== undefined && isNaN(text) === true)  {
     result = {
@@ -96,21 +95,6 @@ app.get('/appenda/:text', (req, res) => {
   res.send(result);
 });
 
-app.get('/dountil/:action', (req, res) => {
-  // let action = req.params.action
-  // let until = req.query.until
-  // let result;
-  // if (action !== undefined && isNaN(until) === false)  {
-  //   result = {
-  //     'appended': text + 'a'
-  //   }
-  // } else {
-  //   result = {
-  //     "error": "Please provide an input!"
-  //   }
-  // }
-  // res.send(result);
-});
 
 
 
