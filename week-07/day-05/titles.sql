@@ -15,6 +15,16 @@ INSERT INTO posts(title, url, owner_name) VALUES ('Cat world', 'http://cats.com'
 INSERT INTO posts(title, url, owner_name) VALUES ('Table Tennis Daily', 'http://pingpong.hu', 'pistike');
 INSERT INTO posts(title, url, owner_name) VALUES ('Green Fox Academy', 'http://zoldroka.hu', 'pistike');
 
+CREATE TABLE `users` (
+	`user_id` INT NOT NULL AUTO_INCREMENT,
+	`user_name` VARCHAR(255) NOT NULL,
+	KEY `user_id` (`user_id`) USING BTREE
+);
+
+INSERT INTO users(user_name) VALUES ('Feri');
+INSERT INTO users(user_name) VALUES ('Pisti');
+INSERT INTO users(user_name) VALUES ('Marcsi');
+
 
 
 

@@ -26,12 +26,34 @@ conn.connect(err => {
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/hello', function(req, res) {
+app.get('/hello', function (req, res) {
   res.send('Hello')
 });
 
-app.get('/posts', function(req, res) {
-  res.send('Hello')
+app.get('/posts', function (req, res) {
+  let query = `SELECT * FROM posts;`
+  conn.query(query, function (err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error');
+      return;
+    }
+    res.type('application/json')
+    res.status(200).json(rows);
+  });
+});
+
+app.post('/posts', function (req, res) {
+  let query = `SELECT * FROM posts;`
+  conn.query(query, function (err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error');
+      return;
+    }
+    res.type('application/json')
+    res.status(200).json(rows);
+  });
 });
 
 app.listen(PORT, () => {
