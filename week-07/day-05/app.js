@@ -77,22 +77,68 @@ app.put('/posts/:id/:vote', function (req, res) {
   let vote = req.params.vote
   let post_id = req.params.id
   let voter = req.headers.username
-  let query;
-  if (vote === 'upvote') {
-    query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,1);'
-  } else if (vote === 'downvote') {
-    query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,-1);'
-  }
-  conn.query(query, [post_id, voter], function (err, rows) {
+  conn.query('SELECT vote FROM votes WHERE post_id = ? AND user_name = ?', [post_id, voter], function (err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Search is there a vote error');
+      return;
+    } else if ((rows.length !== 0 && rows[0].vote === 1  && vote === 'upvote') || (rows.length !== 0 && rows[0].vote === -1  && vote === 'downvote')) {
+      conn.query('DELETE FROM votes WHERE post_id = ? AND user_name = ?', [post_id, voter], function (err, rows) {
+          if (err) {
+            console.log(err.toString());
+            res.status(500).send('Set vote to 0 error');
+            return;
+          }
+          res.type('application/json')
+          res.status(200).send(rows);
+          return;
+        });
+    } else {
+      let query;
+      if (vote === 'upvote') {
+        query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,1);'
+      } else if (vote === 'downvote') {
+        query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,-1);'
+      }
+      conn.query(query, [post_id, voter], function (err, rows) {
+        if (err) {
+          console.log(err.toString());
+          res.status(500).send('Upvote error');
+          return;
+        }
+        res.type('application/json')
+        res.status(200).send(rows);
+      });
+    }
+  });
+});
+
+app.delete('/posts/:id', function(req,res) {
+  let post_id = req.params.id
+  let query = 'DELETE FROM posts WHERE id=?;'
+  let query2 = 'DELETE FROM votes WHERE post_id=?;'
+  conn.query(query, [post_id], function (err, rows) {
     if (err) {
       console.log(err.toString());
       res.status(500).send('Upvote error');
       return;
     }
     res.type('application/json')
-    res.status(200).send(rows);
+    res.status(200)
+    console.log(rows)
   });
-});
+  conn.query(query2, [post_id], function (err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Upvote error');
+      return;
+    }
+    res.type('application/json')
+    res.status(200)
+    console.log(rows)
+  });
+
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
