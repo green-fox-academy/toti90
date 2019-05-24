@@ -29,8 +29,15 @@ app.get('/hello', function (req, res) {
 });
 
 app.get('/posts', function (req, res) {
-  let query = `SELECT * FROM posts;`
-  conn.query(query, function (err, rows) {
+  let user = req.headers.username
+  console.log(user)
+  let query = `SELECT p1.id, p1.title, p1.url, p1.timestamp, CASE WHEN (SELECT SUM(vote)
+  FROM votes WHERE post_id = p1.id GROUP BY post_id) IS NOT NULL THEN (SELECT SUM(vote)
+  FROM votes WHERE post_id = p1.id GROUP BY post_id) ELSE 0 END AS score, 
+  p1.owner_name, CASE WHEN p2.vote IS NULL THEN 0 ELSE p2.vote END AS vote FROM posts p1 
+  LEFT JOIN (SELECT p.id, p.title, p.url, p.timestamp, p.owner_name, v.vote FROM posts p JOIN votes v ON p.id = v.post_id 
+  WHERE v.user_name = ?) AS p2 ON p1.id = p2.id;`
+  conn.query(query, [user], function (err, rows) {
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error');
