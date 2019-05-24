@@ -1,13 +1,13 @@
 'use strict';
 
 require('dotenv').config();
-const bodyParser = require('body-parser').json()
+const bodyParser = require('body-parser')
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
-const PORT = 3001;
-// app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser)
+const PORT = 3100;
+app.use(bodyParser.text())
+
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -23,14 +23,12 @@ conn.connect(err => {
   console.log('connection to DB is OK ✨');
 });
 
-
 app.get('/hello', function (req, res) {
   res.send('Hello')
 });
 
 app.get('/posts', function (req, res) {
   let user = req.headers.username
-  console.log(user)
   let query = `SELECT p1.id, p1.title, p1.url, p1.timestamp, CASE WHEN (SELECT SUM(vote)
   FROM votes WHERE post_id = p1.id GROUP BY post_id) IS NOT NULL THEN (SELECT SUM(vote)
   FROM votes WHERE post_id = p1.id GROUP BY post_id) ELSE 0 END AS score, 
@@ -50,8 +48,8 @@ app.get('/posts', function (req, res) {
 
 app.post('/posts', function (req, res) {
   let post = {
-    'title': req.body.title,
-    'url': req.body.url,
+    'title': JSON.parse(req.body).title,
+    'url': JSON.parse(req.body).url,
     'owner_name': req.headers.username
   }
   let query_post = 'INSERT INTO posts SET ?'
@@ -75,51 +73,26 @@ app.post('/posts', function (req, res) {
   });
 });
 
-app.put('/posts/:id/upvote', function(req,res) {
-  let query_upvote = 'UPDATE posts SET score = score + 1 WHERE id = ?;'
+app.put('/posts/:id/:vote', function (req, res) {
+  let vote = req.params.vote
   let post_id = req.params.id
-  conn.query(query_upvote, post_id, function (err, rows) {
+  let voter = req.headers.username
+  let query;
+  if (vote === 'upvote') {
+    query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,1);'
+  } else if (vote === 'downvote') {
+    query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,-1);'
+  }
+  conn.query(query, [post_id, voter], function (err, rows) {
     if (err) {
       console.log(err.toString());
       res.status(500).send('Upvote error');
       return;
-    } else {
-        let query_get = 'SELECT * FROM posts WHERE id = ?;'
-        conn.query(query_get, post_id, function (err, rows) {
-          if (err) {
-            console.log(err.toString());
-            res.status(500).send('Error after upvote select');
-            return;
-          }
-          res.type('application/json')
-          res.status(200).send(rows);
-        });
-      }
+    }
+    res.type('application/json')
+    res.status(200).send(rows);
   });
-})
-
-app.put('/posts/:id/downvote', function(req,res) {
-  let query_downvote = 'UPDATE posts SET score = score - 1 WHERE id = ?;'
-  let post_id = req.params.id
-  conn.query(query_downvote, post_id, function (err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Upvote error');
-      return;
-    } else {
-        let query_get = 'SELECT * FROM posts WHERE id = ?;'
-        conn.query(query_get, post_id, function (err, rows) {
-          if (err) {
-            console.log(err.toString());
-            res.status(500).send('Error after upvote select');
-            return;
-          }
-          res.type('application/json')
-          res.status(200).send(rows);
-        });
-      }
-  });
-})
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
