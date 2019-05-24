@@ -96,9 +96,17 @@ app.put('/posts/:id/:vote', function (req, res) {
     } else {
       let query;
       if (vote === 'upvote') {
-        query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,1);'
+        if (rows.length !== 0) {
+          query = 'UPDATE votes SET vote = 1 WHERE post_id = ? AND user_name = ?'
+        } else {
+          query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,1);'
+        }
       } else if (vote === 'downvote') {
-        query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,-1);'
+        if (rows.length !== 0) {
+          query = 'UPDATE votes SET vote = -1 WHERE post_id = ? AND user_name = ?'
+        } else {
+          query = ' INSERT INTO votes(post_id, user_name, vote) VALUES (?,?,-1);'
+        }
       }
       conn.query(query, [post_id, voter], function (err, rows) {
         if (err) {
