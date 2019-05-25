@@ -152,25 +152,36 @@ app.put('/posts/:id', function (req, res) {
   let id = req.params.id
   let whereQueries = [];
   let whereParams = [];
-  if (title !== undefined) {
-    whereQueries.push(`title = ?`);
-    whereParams.push(title)
-  } 
-  if (url !== undefined) {
-    whereQueries.push(`url = ?`);
-    whereParams.push(url)
-  }
-  const whereSQL = `SET ${whereQueries.join(', ')}`
-  let query = `UPDATE posts ${whereSQL} WHERE id = ${id}`
-  console.log(query)
-  conn.query(query, whereParams, function (err, rows) {
+  let user = req.headers.username
+  conn.query('SELECT owner_name FROM posts WHERE id = ?', [id], function (err, rows) {
     if (err) {
       console.log(err.toString());
-      res.status(500).send('Update error');
+      res.status(500).send('Search is there a vote error');
       return;
+    } else if (user === rows[0].owner_name) {
+      if (title !== undefined) {
+        whereQueries.push(`title = ?`);
+        whereParams.push(title)
+      }
+      if (url !== undefined) {
+        whereQueries.push(`url = ?`);
+        whereParams.push(url)
+      }
+      const whereSQL = `SET ${whereQueries.join(', ')}`
+      let query = `UPDATE posts ${whereSQL} WHERE id = ${id}`
+      console.log(query)
+      conn.query(query, whereParams, function (err, rows) {
+        if (err) {
+          console.log(err.toString());
+          res.status(500).send('Update error');
+          return;
+        }
+        res.type('application/json')
+        res.status(200).send(rows)
+      });
+    } else {
+      res.send('This is not your post')
     }
-    res.type('application/json')
-    res.status(200).send('rows')
   });
 });
 
