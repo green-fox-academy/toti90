@@ -11,7 +11,7 @@ window.onload = () => {
 }
 
 login_button.addEventListener('click', function(event) {
-  httpRequest.open('POST', `http://localhost:3100/auth`, true);
+  httpRequest.open('GET', `http://localhost:3100/auth`, true);
   httpRequest.setRequestHeader('username', login_input.value)
   httpRequest.send()
   httpRequest.onload = (response) => {

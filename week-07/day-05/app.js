@@ -26,7 +26,7 @@ conn.connect(err => {
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', function(req, res) {
+app.get('/home', function(req, res) {
   res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
@@ -42,16 +42,14 @@ app.get('/login', function(req, res) {
 //   //hogyan fogom megküldeni az index.htmlt?
 // });
 
-app.post('/auth', (req, res) => {
-  console.log(req.headers.username)
+app.get('/auth', (req, res) => {
   conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
     if (err) {
       res.status(500).send('Get is that user alredy registered error');
       return;
       //Send back posts
     } else if (rows.length !== 0) {
-      console.log('Im here')
-      res.redirect('/');
+      res.redirect(`/home?username=${req.headers.username}`);
     } else {
       res.status(201).send('This user not registered!');
       return;
