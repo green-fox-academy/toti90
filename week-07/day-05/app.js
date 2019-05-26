@@ -63,7 +63,7 @@ app.get('/posts', function (req, res) {
   //Check is that user in the database
   conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
     if (err) {
-      res.status(500).send('Get is that user alredy registered error');
+      res.status(500).send('Error get posts');
       return;
       //Send back posts
     } else if (rows.length !== 0) {

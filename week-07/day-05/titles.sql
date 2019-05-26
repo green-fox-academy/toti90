@@ -7,7 +7,7 @@ CREATE TABLE `posts` (
 	`title` VARCHAR(255) NOT NULL,
 	`url` VARCHAR(255) NOT NULL,
 	`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `owner_name` VARCHAR(100) NOT NULL,
+  `owner_name` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
 	KEY `id` (`id`) USING BTREE
 );
 
@@ -19,7 +19,7 @@ INSERT INTO posts(title, url, owner_name) VALUES ('Something', 'http://something
 
 CREATE TABLE `users` (
 	`user_id` INT NOT NULL AUTO_INCREMENT,
-	`user_name` VARCHAR(255) NOT NULL,
+	`user_name` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
 	KEY `user_id` (`user_id`) USING BTREE
 );
 

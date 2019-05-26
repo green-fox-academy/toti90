@@ -3,6 +3,7 @@
 const welcome_header = document.querySelector('#welcome_header')
 const url = window.location.search
 const content = document.querySelector('#content')
+const logOut = document.querySelector('#logout_button')
 
 
 
@@ -35,3 +36,11 @@ window.onload = () => {
     }
   }
 }
+
+logOut.addEventListener('click', (event) => {
+  httpRequest.open('GET', `http://localhost:3100/login`, true);
+  httpRequest.send()
+  httpRequest.onload = (response) => {
+      window.open(httpRequest.responseURL, '_self')
+  }
+})
