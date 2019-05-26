@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
+const path = require('path');
 const PORT = 3100;
 app.use(bodyParser.text())
 
@@ -23,11 +24,39 @@ conn.connect(err => {
   console.log('connection to DB is OK ✨');
 });
 
-app.get('/login', function (req, res) {
-  res.sendFile('login.html')
-  //login.html-en lesz egy form és egy submit button és meghívjuk onnan a /posts endpointot
-  //aminek a headerjében benne van a formban megadott username
-  //hogyan fogom megküldeni az index.htmlt?
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname+'/public/index.html'));
+});
+
+
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname+'/public/login.html'));
+});
+
+// app.get('/', function (req, res) {
+//   res.sendFile(__dirname + '/public/login.html')
+//   //login.html-en lesz egy form és egy submit button és meghívjuk onnan a /posts endpointot
+//   //aminek a headerjében benne van a formban megadott username
+//   //hogyan fogom megküldeni az index.htmlt?
+// });
+
+app.post('/auth', (req, res) => {
+  console.log(req.headers.username)
+  conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
+    if (err) {
+      res.status(500).send('Get is that user alredy registered error');
+      return;
+      //Send back posts
+    } else if (rows.length !== 0) {
+      console.log('Im here')
+      res.redirect('/');
+    } else {
+      res.status(201).send('This user not registered!');
+      return;
+    }
+  });
 });
 
 app.get('/posts', function (req, res) {
