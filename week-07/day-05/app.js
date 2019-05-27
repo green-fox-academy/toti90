@@ -35,12 +35,6 @@ app.get('/login', function(req, res) {
   res.sendFile(path.join(__dirname+'/public/login.html'));
 });
 
-// app.get('/', function (req, res) {
-//   res.sendFile(__dirname + '/public/login.html')
-//   //login.html-en lesz egy form és egy submit button és meghívjuk onnan a /posts endpointot
-//   //aminek a headerjében benne van a formban megadott username
-//   //hogyan fogom megküldeni az index.htmlt?
-// });
 
 app.get('/auth', (req, res) => {
   conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
@@ -58,9 +52,6 @@ app.get('/auth', (req, res) => {
 });
 
 app.get('/posts', function (req, res) {
-  //Username megjön a getből és le kell csekkolni, hogy benne van e a userbe és ha igen akkor
-  //vissza kell küldeni a contentet és az index.html-re áttérni
-  //Check is that user in the database
   conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
     if (err) {
       res.status(500).send('Error get posts');
