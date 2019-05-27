@@ -13,11 +13,7 @@ class TennisGame1 {
 
   getScore() {
     if (this.playerOneScore === this.playerTwoScore) {
-      if (this.playerOneScore<3) {
-        return `${getScore(this.playerOneScore)}-All`
-      } else {
-        return 'Deuce'
-      }
+      return this.playerOneScore < 3 ? `${getScore(this.playerOneScore)}-All` : 'Deuce'
     } else if (this.playerOneScore >= 4 || this.playerTwoScore >= 4) {
       var minusResult = this.playerOneScore - this.playerTwoScore;
       if (minusResult === 1) return "Advantage player1";
