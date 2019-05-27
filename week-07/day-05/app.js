@@ -26,13 +26,13 @@ conn.connect(err => {
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/home', function(req, res) {
-  res.sendFile(path.join(__dirname+'/public/index.html'));
+app.get('/home', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 
-app.get('/login', function(req, res) {
-  res.sendFile(path.join(__dirname+'/public/login.html'));
+app.get('/login', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/login.html'));
 });
 
 
@@ -126,9 +126,15 @@ app.put('/posts/:id/:vote', function (req, res) {
             if (err) {
               res.status(500).send('Set vote to 0 error');
               return;
+            } else {
+              conn.query('SELECT CASE WHEN SUM(vote) IS NULL THEN 0 ELSE SUM(vote) END as score FROM votes WHERE post_id = ?', post_id, function (err, rows) {
+                if (err) {
+                  res.status(500).send('Database get posts error');
+                  return;
+                }
+                res.type('application/json').status(200).send({ score: `${rows[0].score}`, vote: '0' });
+              });
             }
-            res.type('application/json').status(200).send(rows);
-            return;
           });
         } else {
           let queryVote;
@@ -149,13 +155,19 @@ app.put('/posts/:id/:vote', function (req, res) {
             if (err) {
               res.status(500).send('Upvote error');
               return;
+            } else {
+              conn.query('SELECT CASE WHEN SUM(vote) IS NULL THEN 0 ELSE SUM(vote) END as score FROM votes WHERE post_id = ?', post_id, function (err, rows) {
+                if (err) {
+                  res.status(500).send('Database get posts error');
+                  return;
+                }
+                res.type('application/json').status(200).send({ score: `${rows[0].score}`, vote: (vote === 'upvote' ? '1' : '-1') });
+                //res.type('application/json').status(200).send(vote === 'upvote' ? '1':'-1');
+              });
             }
-            res.type('application/json').status(200).send(rows);
           });
         }
       });
-    } else {
-      res.send('This user not registered')
     }
   });
 });
