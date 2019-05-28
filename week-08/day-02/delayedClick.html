@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DelayedClick</title>
+</head>
+
+<body>
+  <button>Button</button>
+  <h3></h3>
+
+  <script>
+    const button = document.querySelector('button')
+    const h3 = document.querySelector('h3')
+
+    button.addEventListener('click', () => {
+      setTimeout(function () {
+        h3.innerHTML='2 seconds elapsed';
+      }, 2000);
+    })
+  </script>
+
+</body>
+
+</html>
