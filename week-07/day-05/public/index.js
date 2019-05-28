@@ -21,29 +21,34 @@ function windowRender() {
   httpRequest.onload = (response) => {
     welcome_header.innerHTML = `Welcome on board ${user}`
     data = JSON.parse(httpRequest.responseText)
-    for (let i=0; i<data.length;i++) {
+    for (let i = 0; i < data.length; i++) {
       let ul = document.createElement('ul')
       for (let element of Object.keys(data[i])) {
         let li = document.createElement('li')
-        li.classList.add(`${element}${i+1}`)
+        li.classList.add(`${element}${i + 1}`)
         li.innerHTML = `${element}: ${data[i][element]}`
         ul.appendChild(li)
       }
       let buttonUp = document.createElement('button')
       buttonUp.addEventListener('click', voteUp)
-      data[i].vote > 0 ? buttonUp.classList.add('votedUp'):''
-      buttonUp.setAttribute('number', `${i+1}`)
-      buttonUp.classList.add(`buttonUp${i+1}`)
-      buttonUp.innerHTML="Vote up"
+      data[i].vote > 0 ? buttonUp.classList.add('votedUp') : ''
+      buttonUp.setAttribute('number', `${i + 1}`)
+      buttonUp.classList.add(`buttonUp${i + 1}`)
+      buttonUp.innerHTML = "Vote up"
       let buttonDown = document.createElement('button')
-      buttonDown.addEventListener('click', ()=>{voteDown()})
-      data[i].vote < 0 ? buttonDown.classList.add('votedDown'):''
-      buttonDown.setAttribute('number', `${i+1}`)
-      buttonDown.classList.add(`buttonDown${i+1}`)
-      buttonDown.innerHTML="Vote down"
+      buttonDown.addEventListener('click', () => { voteDown() })
+      data[i].vote < 0 ? buttonDown.classList.add('votedDown') : ''
+      buttonDown.setAttribute('number', `${i + 1}`)
+      buttonDown.classList.add(`buttonDown${i + 1}`)
+      buttonDown.innerHTML = "Vote down"
       content.appendChild(ul)
       content.appendChild(buttonUp)
       content.appendChild(buttonDown)
+      if (user === data[i]['owner_name']) {
+        let deleteButton = document.createElement('button')
+        deleteButton.innerHTML = 'Delete post'
+        content.appendChild(deleteButton)
+      }
     }
   }
 }
@@ -52,7 +57,7 @@ logOut.addEventListener('click', (event) => {
   httpRequest.open('GET', `http://localhost:3100/login`, true);
   httpRequest.send()
   httpRequest.onload = (response) => {
-      window.open(httpRequest.responseURL, '_self')
+    window.open(httpRequest.responseURL, '_self')
   }
 })
 
@@ -67,8 +72,8 @@ const voteUp = () => {
     document.querySelector(`.score${buttonNumb}`).innerHTML = `score: ${data['score']}`
     let downButton = document.querySelector(`.buttonDown${buttonNumb}`)
     let isDownButtonPressed = downButton.getAttribute('class').includes('votedDown')
-    isDownButtonPressed ? downButton.classList.remove('votedDown'):''
-    data['vote'] === '0' ?  button.classList.remove('votedUp') : button.classList.add('votedUp')
+    isDownButtonPressed ? downButton.classList.remove('votedDown') : ''
+    data['vote'] === '0' ? button.classList.remove('votedUp') : button.classList.add('votedUp')
   }
   httpRequest.send()
 }
@@ -76,7 +81,7 @@ const voteUp = () => {
 const voteDown = () => {
   let button = window.event.target
   let buttonNumb = button.getAttribute('number')
-  httpRequest.open('PUT', `http://localhost:3100/posts/${window.event.target.getAttribute('number')}/downvote`);
+  httpRequest.open('PUT', `http://localhost:3100/posts/${buttonNumb}/downvote`);
   httpRequest.setRequestHeader('username', user)
   httpRequest.onload = (response) => {
     let data = JSON.parse(httpRequest.responseText)
@@ -84,8 +89,8 @@ const voteDown = () => {
     document.querySelector(`.score${buttonNumb}`).innerHTML = `score: ${data['score']}`
     let upButton = document.querySelector(`.buttonUp${buttonNumb}`)
     let isUpButtonPressed = upButton.getAttribute('class').includes('votedUp')
-    isUpButtonPressed ? upButton.classList.remove('votedUp'):''
-    data['vote'] === '0' ?  button.classList.remove('votedDown') : button.classList.add('votedDown')
+    isUpButtonPressed ? upButton.classList.remove('votedUp') : ''
+    data['vote'] === '0' ? button.classList.remove('votedDown') : button.classList.add('votedDown')
   }
   httpRequest.send()
 }
