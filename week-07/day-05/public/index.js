@@ -4,6 +4,10 @@ const welcome_header = document.querySelector('#welcome_header')
 const url = window.location.search
 const content = document.querySelector('#content')
 const logOut = document.querySelector('#logout_button')
+const postBtn = document.querySelector('.postPost')
+const titleInput = document.querySelector('.titleInput')
+const urlInput = document.querySelector('.urlInput')
+
 
 let user = url.match(/\=(\w*)/)[1]
 
@@ -36,7 +40,7 @@ function windowRender() {
       buttonUp.classList.add(`buttonUp${i + 1}`)
       buttonUp.innerHTML = "Vote up"
       let buttonDown = document.createElement('button')
-      buttonDown.addEventListener('click', () => { voteDown() })
+      buttonDown.addEventListener('click', voteDown)
       data[i].vote < 0 ? buttonDown.classList.add('votedDown') : ''
       buttonDown.setAttribute('number', `${i + 1}`)
       buttonDown.classList.add(`buttonDown${i + 1}`)
@@ -48,6 +52,9 @@ function windowRender() {
         let deleteButton = document.createElement('button')
         deleteButton.innerHTML = 'Delete post'
         content.appendChild(deleteButton)
+        let updateButton = document.createElement('button')
+        updateButton.innerHTML = 'Update post'
+        content.appendChild(updateButton)
       }
     }
   }
@@ -91,6 +98,16 @@ const voteDown = () => {
     let isUpButtonPressed = upButton.getAttribute('class').includes('votedUp')
     isUpButtonPressed ? upButton.classList.remove('votedUp') : ''
     data['vote'] === '0' ? button.classList.remove('votedDown') : button.classList.add('votedDown')
+  }
+  httpRequest.send()
+}
+
+const post = () => {
+  let postTitle = titleInput.value
+  let postUtl = urlInput.value
+  httpRequest.open('POST', `http://localhost:3100/posts`);
+  httpRequest.setRequestHeader('username', user)
+  httpRequest.onload = (response) => {
   }
   httpRequest.send()
 }
