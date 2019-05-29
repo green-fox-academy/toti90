@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie Selector</title>
+</head>
+
+<body>
+  <h1>Movie Selector</h1>
+  <select name="genre" id="genreDrop">
+    <option value="">Select a genre</option>
+    <option value="Scifi">Sci-fi</option>
+    <option value="Drama">Drama</option>
+    <option value="Comedy">Comedy</option>
+  </select>
+  <select name="movie" id="movieDrop">
+    <option value="">Select a movie</option>
+    <option value="Moon" class="Scifi">Moon</option>
+    <option value="2001: A Space Odyssey" class="Drama">2001: A Space Odyssey</option>
+    <option value="Contact" class="Comedy">Contact</option>
+    <option value="Darkest Hour" class="Scifi">Darkest Hour</option>
+    <option value="There Will Be Blood" class="Drama">There Will Be Blood</option>
+    <option value="American Beauty" class="Comedy">American Beauty</option>
+    <option value="Airplane!" class="Scifi">Airplane!</option>
+    <option value="Deadpool" class="Drama">Deadpool</option>
+    <option value="Wayne's World" class="Comedy">Wayne's World</option>
+  </select>
+  <h3>The Selected Movie is: -</h3>
+
+  <script>
+    const films = document.querySelector('#movieDrop')
+    const genres = document.querySelector('#genreDrop')
+    const titleText = document.querySelector('h3')
+    genres.addEventListener('change', () => {
+      films.value = ""
+      titleText.innerHTML = `The Selected Movie is: -`
+      if (event.target.value.length > 0) {
+        for (let film of films) {
+          film.hidden = false;
+          if (film.classList.value !== event.target.value) {
+            film.hidden = true;
+          }
+        }
+      } else {
+        for (let film of films) {
+          film.hidden = false;
+        }
+      }
+    })
+    films.addEventListener('change', () => {
+      if (event.target.value.length > 0) {
+        titleText.innerHTML = `The Selected Movie is: ${event.target.value}`
+      } else {
+        titleText.innerHTML = `The Selected Movie is: -`
+      }
+      for (let film of films) {
+        if (film.innerHTML === event.target.value) {
+          genres.value = film.classList.value
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
