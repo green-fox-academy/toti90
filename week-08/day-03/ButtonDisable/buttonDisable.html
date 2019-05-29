@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Button Disable</title>
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <div>
+      <label for="pet">What is Your favourite pet?</label>
+    </div>
+    <div>
+      <input type="radio" name="pet" id="dog">
+      <label for="dog">Dog</label>
+      <input type="radio" name="pet" id="cat">
+      <label for="cat">Cat</label>
+      <input type="radio" name="pet" id="goldifs">
+      <label for="goldfish">Goldfish</label>
+    </div>
+    <div>
+      <label for="pet">Do you want to sign up for cat facts?</label>
+    </div>
+    <div>
+      <input type="radio" name="news" id="yes">
+      <label for="dog">Yes</label>
+      <input type="radio" name="news" id="no">
+      <label for="cat">No</label>
+    </div>
+    <div>
+      <button class="catBtn">I love cats</button>
+      <button class="signBtn">Signup</button>
+    </div>
+  </form>
+
+  <script>
+    const catBtn = document.querySelector('.catBtn')
+    const signBtn = document.querySelector('.signBtn')
+    const petBtns = document.querySelectorAll('input[name=pet]')
+    const newsBtns = document.querySelectorAll('input[name=news]')
+    const inputs = document.querySelectorAll('input')
+    catBtn.disabled = true;
+    signBtn.disabled = true;
+    for (let input of inputs) {
+      input.addEventListener('click', ()  => {
+      if (petBtns[0].checked || petBtns[1].checked) {
+        signBtn.disabled = false;
+      } else {
+        signBtn.disabled = true;
+      }
+      if (newsBtns[0].checked) {
+        catBtn.disabled = false;
+      } else {
+        catBtn.disabled = true;
+      }
+      if (petBtns[2].checked && newsBtns[1].checked) {
+        signBtn.disabled = false;
+        catBtn.disabled = true;
+      }
+    })
+    }
+     signBtn.addEventListener('click', () => {
+      if (petBtns[2].checked && newsBtns[1].checked) {
+        alert(`Sigh, we still added you to the cat facts list`)
+      } else {
+        alert(`Thank you, you've successfully signed up for cat facts`)
+      }
+    })
+    
+    
+
+  </script>
+
+</body>
+
+</html>
