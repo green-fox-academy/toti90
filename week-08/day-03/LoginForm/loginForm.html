@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="loginForm.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <title>Login Form</title>
+</head>
+
+<body>
+  <div class="content">
+    <form>
+      <div class="container">
+        <h3>ACCOUNT LOGIN</h3>
+        <h5>USERNAME</h5>
+        <input type="text" name="usrname" id="username" autofocus>
+        <h5>PASSWORD</h5>
+        <div class="password">
+          <input type="password" name="password" id="password">
+          <i class="fa fa-eye"></i>
+        </div>
+        <p>Forgot Password?</p>
+        <button>Login</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const eye = document.querySelector('i')
+    const password = document.querySelector('#password')
+
+    eye.addEventListener('click', () => {
+      if (password.type === 'text') {
+        password.type = 'password'
+        eye.classList.remove('fa-eye-slash')
+        eye.classList.add('fa-eye')
+      } else {
+        password.type = 'text'
+        eye.classList.add('fa-eye-slash')
+        eye.classList.remove('fa-eye')
+      }
+    })
+  </script>
+
+</body>
+
+</html>
