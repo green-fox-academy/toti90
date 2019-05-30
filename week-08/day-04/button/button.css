@@ -25,29 +25,18 @@ button:nth-child(1) {
   color: #C5D6FF;
   outline:none;
 }
-button:hover:nth-child(1) {
-  background-color: rgb(74, 100, 185);
-  box-shadow: 0px 5px 0px rgb(49, 62, 136);
+button:hover {
+  filter: brightness(110%)
 }
-button:active:nth-child(1) {
-  background-color: rgb(46, 62, 116);
-  box-shadow: 0px 5px 0px rgb(25, 32, 70);
+button:active {
+  filter: brightness(90%);
   outline:none;
 }
 
 button:nth-child(2) {
   background-color: #00B154;
   box-shadow: 0px 5px 0px #007041;
-  color: #87FFC7;
-  outline:none;
-}
-button:hover:nth-child(2) {
-  background-color: rgb(0, 228, 106);
-  box-shadow: 0px 5px 0px #008d52;
-}
-button:active:nth-child(2) {
-  background-color: rgb(0, 121, 56);
-  box-shadow: 0px 5px 0px #004428;
+  color: rgb(182, 252, 219);
   outline:none;
 }
 
@@ -56,13 +45,4 @@ button:nth-child(3) {
   box-shadow: 0px 5px 0px #901328;
   color: #FFA6A1;
   outline:none;
-}
-button:hover:nth-child(3) {
-  background-color: #f54c53;
-  box-shadow: 0px 5px 0px #db1d3d;
-}
-button:active:nth-child(3) {
-  background-color: #a1090e;
-  box-shadow: 0px 5px 0px #540b17;
-  outline: none;
 }
