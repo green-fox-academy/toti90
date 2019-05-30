@@ -111,3 +111,20 @@ const post = () => {
   }
   httpRequest.send()
 }
+
+let input = document.querySelectorAll('input')
+
+document.querySelector('.submit').addEventListener('click', () => {
+  var body = {
+    "title": `${input[0].value}`,
+    "url": `${input[1].value}`
+  }
+  httpRequest.open('POST', `http://localhost:3100/posts`);
+  httpRequest.setRequestHeader('username', user)
+  httpRequest.onload = (response) => {
+    location.reload(windowRender())
+    //console.log(JSON.parse(response.target.responseText)[0])
+  }
+  httpRequest.send(JSON.stringify(body));
+})
+
