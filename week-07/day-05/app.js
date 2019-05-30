@@ -58,7 +58,7 @@ app.get('/posts', function (req, res) {
       return;
       //Send back posts
     } else if (rows.length !== 0) {
-      let queryGetAllPosts = `SELECT p1.id, p1.title, p1.url, p1.timestamp, CASE WHEN (SELECT SUM(vote)
+      let queryGetAllPosts = `SELECT p1.id, p1.title, p1.url, unix_timestamp(p1.timestamp) AS timestamp, CASE WHEN (SELECT SUM(vote)
       FROM votes WHERE post_id = p1.id GROUP BY post_id) IS NOT NULL THEN (SELECT SUM(vote)
       FROM votes WHERE post_id = p1.id GROUP BY post_id) ELSE 0 END AS score, 
       p1.owner_name, CASE WHEN p2.vote IS NULL THEN 0 ELSE p2.vote END AS vote FROM posts p1 
@@ -175,7 +175,7 @@ app.put('/posts/:id/:vote', function (req, res) {
 app.delete('/posts/:id', function (req, res) {
   conn.query('SELECT * FROM users WHERE user_name = ?;', req.headers.username, (err, rows) => {
     if (err) {
-      res.status(500).send('Get is that user alredy registered error');
+      res.status(500).send('This user has not registered');
       return;
     } else if (rows.length !== 0) {
       let post_id = req.params.id;
@@ -189,14 +189,13 @@ app.delete('/posts/:id', function (req, res) {
               res.status(500).send('Upvote error');
               return;
             }
-            res.status(200).type('application/json').send('succ deleted from posts')
-          });
-          conn.query('DELETE FROM votes WHERE post_id=?;', [post_id], function (err, rows) {
-            if (err) {
-              res.status(500).send('Upvote error');
-              return;
-            }
-            res.type('application/json').status(200).send('succ deleted from votes')
+            conn.query('DELETE FROM votes WHERE post_id=?;', [post_id], function (err, rows) {
+              if (err) {
+                res.status(500).send('Upvote error');
+                return;
+              }
+              res.type('application/json').status(200).send(`succ deleted`)
+            });
           });
         } else {
           res.send('This is not your post')
