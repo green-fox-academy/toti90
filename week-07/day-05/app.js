@@ -10,7 +10,6 @@ const PORT = 3100;
 app.use(bodyParser.text())
 
 const { format, render, cancel, register } = require('timeago.js')
-console.log(format(1559295671*1000));
 
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,

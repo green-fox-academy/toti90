@@ -1,8 +1,220 @@
-.votedUp {
-  background-color: rgb(226, 132, 132);
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+ /* HEADER CSS */
+h1 {
+  font-size: 70px;
+  margin:0;
+  letter-spacing: 2px;
+  color: rgb(190, 190, 190);
+}
+
+.headerContainer {
+  height: 300px;
+  width: 100%;
+  background-image: url(./assets/michal-kubalczyk-787999-unsplash-2.jpg);
+  background-position-y: -350px;
+}
+
+.color {
+  background-color: black;
+  height: 300px;
+  width: 100%;
+  opacity: 0.9;
+  text-align: center;
+  line-height: 300px;
+}
+/* MAIN CSS */
+
+.mainContainer {
+  display: flex;
+}
+
+#content {
+  flex-grow: 3;
+  background-color: gray;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
+
+.formContainer {
+  min-width: 30%;
+  flex-grow: 1;
+  background-color: #303841;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  outline:none;
+  border:none;
+  background-color: #6a6e74;
+  box-shadow: 3px 3px 1px #1B242B;
+  color: white;
+  padding-left: 20px;
+}
+
+input:focus {
+  border: 2px solid #00C47F;
+}
+
+#logout_button {
+  margin: 20px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  background-color: #1B242B
+}
+
+h4 {
+  font-size: 24px;
+  color:white;
+}
+
+.submit {
+  width: 55px;
+  height: 55px;
+  background-color: #1B242B;
+  border: none;
+  position: relative;
+  outline: none;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+.form > button > i {
+  font-size: 22px;
+  color: #00C47F;
+}
+
+.postContainer {
+  width: 400px;
+  height: 200px;
+  margin: 8px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding:10px;
+  box-shadow: 2px 5px 5px black;
+}
+
+.postContainer:first-child {
+  margin-top: 10px;
+}
+
+.btnUp, .btnDown, .deleteBtn, .updateBtn {
+  border: none;
+  outline: none;
+}
+
+.btnDown {
+  order:3;
+}
+
+.btnUp {
+  order: 1;
+}
+
+.deleteBtn {
+  order:5;
+}
+
+.updateBtn {
+  order:4;
+  margin: 0px 20px;
+}
+
+.updateBtn:hover, .deleteBtn:hover {
+  color:rgb(216, 49, 49);
+}
+
+ul {
+  order:2;
+  margin-top:5px;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+  order:1;
+  width: 10%;
+}
+
+p {
+  order:2;
+  font-size: 30px;
+  margin: 0;
+}
+
+
+.btnUp > i, .btnDown > i, .updateBtn > i, .deleteBtn > i {
+  font-size: 40px;
 }
 
 .votedDown {
-  background-color: rgb(132, 226, 152);
+  color: rgb(226, 132, 132);
+}
+
+.votedUp {
+  color: rgb(132, 226, 152);
+}
+
+li {
+  list-style: none;
+}
+
+li:first-child {
+  font-size: 30px;
+  margin: 0 0 5px 0;
+}
+
+li:nth-child(2) {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+li:nth-child(3) {
+  font-size: 16px;
+  font-weight: 100;
+  margin-bottom:5px;
+}
+
+@media screen and (max-width: 1000px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .headerContainer {
+    height: 200px;
+    background-position-y: -400px;
+  }
+  
+  .color {
+    height: 200px;
+  line-height: 200px;
+  }
+
+
 }
 
