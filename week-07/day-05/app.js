@@ -9,6 +9,9 @@ const path = require('path');
 const PORT = 3100;
 app.use(bodyParser.text())
 
+const { format, render, cancel, register } = require('timeago.js')
+console.log(format(1559295671*1000));
+
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -68,6 +71,9 @@ app.get('/posts', function (req, res) {
         if (err) {
           res.status(500).send('Database get posts error');
           return;
+        }
+        for (let row of rows) {
+          row.timestamp = format(row.timestamp*1000)
         }
         res.type('application/json').status(200).send(rows);
       });

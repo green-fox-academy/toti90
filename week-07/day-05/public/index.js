@@ -7,15 +7,14 @@ const logOut = document.querySelector('#logout_button')
 const postBtn = document.querySelector('.postPost')
 const titleInput = document.querySelector('.titleInput')
 const urlInput = document.querySelector('.urlInput')
-
-
+const input = document.querySelectorAll('input')
 let user = url.match(/\=(\w*)/)[1]
 
 let httpRequest = new XMLHttpRequest();
 
 window.onload = () => {
   windowRender()
-
+  
 }
 let data
 
@@ -61,6 +60,8 @@ function windowRender() {
         content.appendChild(deleteButton)
         let updateButton = document.createElement('button')
         updateButton.innerHTML = 'Update post'
+        updateButton.addEventListener('click', updatePost)
+        updateButton.setAttribute(`update`, `${idNum}`)
         updateButton.classList.add(`update${idNum}`)
         content.appendChild(updateButton)
       }
@@ -122,7 +123,6 @@ const post = () => {
 
 //Add new Post
 document.querySelector('.submit').addEventListener('click', () => {
-  let input = document.querySelectorAll('input')
   var body = {
     "title": `${input[0].value}`,
     "url": `${input[1].value}`
@@ -150,6 +150,21 @@ const deletePost = () => {
     content.removeChild(document.querySelector(`.update${deletedPost}`))
   }
   httpRequest.send();
+}
+
+const updatePost = () => {
+  const updatedPost = event.target.getAttribute('update')
+  console.log(updatedPost)
+  var body = {
+    "title": `${input[0].value}`,
+    "url": `${input[1].value}`
+  }
+  httpRequest.open('PUT', `http://localhost:3100/posts/${updatedPost}`);
+  httpRequest.setRequestHeader('username', user)
+  httpRequest.onload = (response) => {
+    console.log(response)
+  }
+  httpRequest.send(JSON.stringify(body));
 }
 
 
