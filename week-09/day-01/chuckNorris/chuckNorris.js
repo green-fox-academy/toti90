@@ -3,8 +3,7 @@
 document.querySelector('button').addEventListener('click', () => {
   fetch('http://api.icndb.com/jokes/random')
     .then(response => response.json())
-    .then(data => data.value.joke)
-    .then(joke => createP(joke))
+    .then(data => createP(data.value.joke))
     .catch(err => console.error(err))
 }) 
 
