@@ -1,18 +1,27 @@
-`use strict`;
+'use strict';
+
+function iterate(num) {
+ console.log(num);
+ return num + 1;
+}
 
 function alwaysThrows() {
-  let error = new Error('OH NOES')
-  return error.message
+ throw new Error('OH NOES');
 }
 
-function iterate(integer) {
-  console.log(integer)
-  integer++
-  return integer
+function onReject(error) {
+ console.log(error.message);
 }
 
-// let promise = new Promise((resolve,reject) => {
-//   resolve(iterate(1))
-// })
-
-Promise.resolve(1).then(iterate).then(iterate).then(alwaysThrows).catch(console.log)
+Promise.resolve(iterate(1))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>alwaysThrows(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.then(data=>iterate(data))
+.catch(onReject);
