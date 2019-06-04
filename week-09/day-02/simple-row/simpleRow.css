@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+}
+
+.main {
+  box-sizing: border-box;
+  background-color: purple;
+  width: 100%;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.yellow-left,.yellow-right {
+  background-color: yellow;
+}
+
+.green-middle {
+  background-color: green;
+}
+
+.yellow-left, .yellow-right, .green-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+

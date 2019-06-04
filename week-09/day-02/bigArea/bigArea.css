@@ -1,0 +1,34 @@
+body {
+  margin:0;
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  background-color: black;
+  grid-gap: 10px;
+}
+
+.one{
+  grid-column: 1/2;
+  background-color: purple;
+}
+
+.two {
+  grid-column: 2/4;
+  grid-row: 1/3;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.two-one {
+  background-color: yellow;
+  width: 70%;
+  height: 60%;
+}
+
+.three, .four, .five, .six {
+  background-color: purple;
+}
