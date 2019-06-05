@@ -33,4 +33,29 @@ app.get('/questions', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/questions.html'))
 })
 
+app.get('/api/game', (req, res) => {
+  conn.query('SELECT * FROM questions', (err,rows) => {
+    if (err) {
+      res.status(400).send('Database select error on questions')
+    } else if (rows.length !== 0) {
+      let numberOfQuestions = rows.length
+      let randomQuestion = Math.floor(Math.random()*numberOfQuestions)
+      let result = {id: rows[randomQuestion].id, question: rows[randomQuestion].question}
+      conn.query('SELECT * FROM answers WHERE question_id=?',[rows[randomQuestion].id], (err,rows) => {
+        if (err) {
+          console.log(err)
+          res.status(400).send('Database select error on answers')
+        } else {
+          let answers = []
+          rows.forEach(row => answers.push(row))
+          result.answer = answers
+          res.status(200).send(result)
+        }
+      } )
+    } else {
+      res.status(200).send('No item in database')
+    }
+  })
+})
+
 app.listen(PORT, () => {console.log(`App listen to port: ${PORT}`)})
