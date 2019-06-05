@@ -34,14 +34,14 @@ app.get('/questions', (req, res) => {
 })
 
 app.get('/api/game', (req, res) => {
-  conn.query('SELECT * FROM questions', (err,rows) => {
+  conn.query('SELECT * FROM questions', (err, rows) => {
     if (err) {
       res.status(400).send('Database select error on questions')
     } else if (rows.length !== 0) {
       let numberOfQuestions = rows.length
-      let randomQuestion = Math.floor(Math.random()*numberOfQuestions)
-      let result = {id: rows[randomQuestion].id, question: rows[randomQuestion].question}
-      conn.query('SELECT * FROM answers WHERE question_id=?',[rows[randomQuestion].id], (err,rows) => {
+      let randomQuestion = Math.floor(Math.random() * numberOfQuestions)
+      let result = { id: rows[randomQuestion].id, question: rows[randomQuestion].question }
+      conn.query('SELECT * FROM answers WHERE question_id=?', [rows[randomQuestion].id], (err, rows) => {
         if (err) {
           console.log(err)
           res.status(400).send('Database select error on answers')
@@ -51,7 +51,7 @@ app.get('/api/game', (req, res) => {
           result.answer = answers
           res.status(200).send(result)
         }
-      } )
+      })
     } else {
       res.status(200).send('No item in database')
     }
@@ -59,10 +59,10 @@ app.get('/api/game', (req, res) => {
 })
 
 app.get('/api/questions', (req, res) => {
-  conn.query('SELECT * FROM questions', (err,rows) => {
+  conn.query('SELECT * FROM questions', (err, rows) => {
     if (err) {
       res.status(400).send('Database select error on questions')
-    } 
+    }
     res.status(200).send(rows)
   })
 })
@@ -70,35 +70,48 @@ app.get('/api/questions', (req, res) => {
 app.post('/api/questions', (req, res) => {
   const question = req.body.question
   const answers = req.body.answers
-  console.log(answers[0].answer_1)
-  console.log(answers[1].answer_2)
-  console.log(answers[2].answer_3)
-  console.log(answers[3].answer_4)
   conn.query('INSERT INTO questions(question) VALUES(?)', [question], (err, rows) => {
     if (err) {
       res.status(400).send('Insert into questions error')
-    } 
+    }
     conn.query('SELECT id FROM questions WHERE question = ?', [question], (err, rows) => {
       if (err) {
         res.status(400).send('SELECT error after insert to questions')
-      } 
+      }
       const newId = rows[0].id
       conn.query(`
         INSERT INTO answers(question_id, answer, is_correct) VALUES(?,?,?),(?,?,?),(?,?,?),(?,?,?);
         `, [
-        newId, answers[0].answer_1, answers[0].is_correct,
-        newId, answers[1].answer_2, answers[1].is_correct,
-        newId, answers[2].answer_3, answers[2].is_correct,
-        newId, answers[3].answer_4, answers[3].is_correct], (err, ans) => {
-          if (err) {
-            console.log(err)
-            res.status(400).send('INSERT INTO answers error')
+          newId, answers[0].answer_1, answers[0].is_correct,
+          newId, answers[1].answer_2, answers[1].is_correct,
+          newId, answers[2].answer_3, answers[2].is_correct,
+          newId, answers[3].answer_4, answers[3].is_correct], (err, ans) => {
+            if (err) {
+              console.log(err)
+              res.status(400).send('INSERT INTO answers error')
+            }
+            res.status(200).send('Added new question successfully!')
           }
-          res.status(200).send('Added new question successfuly!')
-        }
       )
     })
   })
 })
 
-app.listen(PORT, () => {console.log(`App listen to port: ${PORT}`)})
+
+
+app.delete('/api/questions/:id', (req, res) => {
+  const id = req.params.id
+  conn.query('DELETE FROM questions WHERE id = ?', [id], (err, rows) => {
+    if (err) {
+      res.status(400).send('DELETE from questions error')
+    }
+    conn.query('DELETE FROM answers WHERE question_id = ?', [id], (err, rows) => {
+      if (err) {
+        res.status(400).send('DELETE from answers error')
+      }
+      res.status(200).send('Deleted successfully')
+    })
+  })
+})
+
+app.listen(PORT, () => { console.log(`App listen to port: ${PORT}`) })
