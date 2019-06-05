@@ -104,13 +104,16 @@ app.delete('/api/questions/:id', (req, res) => {
   conn.query('DELETE FROM questions WHERE id = ?', [id], (err, rows) => {
     if (err) {
       res.status(400).send('DELETE from questions error')
+    } else if (rows.affectedRows !== 0) {
+      conn.query('DELETE FROM answers WHERE question_id = ?', [id], (err, rows) => {
+        if (err) {
+          res.status(400).send('DELETE from answers error')
+        }
+        res.status(200).send({ id: id })
+      })
+    } else {
+      res.status(200).send('No question with that id')
     }
-    conn.query('DELETE FROM answers WHERE question_id = ?', [id], (err, rows) => {
-      if (err) {
-        res.status(400).send('DELETE from answers error')
-      }
-      res.status(200).send('Deleted successfully')
-    })
   })
 })
 
