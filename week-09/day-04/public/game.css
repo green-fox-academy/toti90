@@ -9,3 +9,15 @@ body {
 .incorrect {
   background-color: red;
 }
+
+#myProgress {
+  width: 200px;
+  background-color: grey;
+  margin: 40px 0 40px 20px;
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: green;
+}

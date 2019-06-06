@@ -6,11 +6,12 @@ const questionDiv = document.querySelector('.question-container')
 const questionLabel = document.querySelector('h2')
 const answerBtns = document.querySelectorAll('button')
 const score = document.querySelector('h1')
-var bar1 = document.querySelector('.ldBar');
-bar1.dataset.value = '80';
-
+const myBar = document.querySelector('#myBar')
+const myBarNumber = document.querySelector('#myBarNumber')
+let bar = 0
+let percent
 let availableQuestions = []
-
+let originalQuestionNumber
 window.onload = () => {
   let httpRequest = new XMLHttpRequest();
   httpRequest.open('GET', `http://localhost:3000/api/questionsNumber`, false);
@@ -18,12 +19,17 @@ window.onload = () => {
   httpRequest.onload = (response) => {
     let datas = JSON.parse(httpRequest.responseText)
     datas.forEach(data => availableQuestions.push(data.id))
+    percent = (1 / (availableQuestions.length)) * 100
+    originalQuestionNumber = availableQuestions.length
   }
   httpRequest.send()
   getQuestion()
 }
 
 function getQuestion() {
+  bar += percent
+  myBar.style.width = `${bar}%`
+  myBarNumber.innerHTML = `${originalQuestionNumber-availableQuestions.length+1}/${originalQuestionNumber}`
   let httpRequest = new XMLHttpRequest();
   let randomQuestion = Math.floor(Math.random() * availableQuestions.length)
   answerBtns.forEach((button) => {
@@ -53,6 +59,7 @@ function getQuestion() {
             showConfirmButton: false,
             timer: 1500
           })
+
         } else {
           event.target.classList.add('incorrect')
           Swal.fire({
