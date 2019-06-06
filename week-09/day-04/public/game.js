@@ -52,27 +52,38 @@ function getQuestion() {
           event.target.classList.add('correct')
           let scoreValue = parseInt(score.innerHTML.match(/(\d)/)[0]) + 1
           score.innerHTML = `SCORE: ${scoreValue++}`
-          Swal.fire({
-            type: 'success',
-            title: 'YEAHH',
-            text: 'Right Answer!',
+          Swal.mixin({
+            toast: true,
             showConfirmButton: false,
             timer: 1500
+          }).fire({
+            type: 'success',
+            title: 'Right Answer'
           })
 
         } else {
           event.target.classList.add('incorrect')
-          Swal.fire({
-            type: 'error',
-            title: 'Oops...',
+          Swal.mixin({
+            toast: true,
             showConfirmButton: false,
-            text: 'Something went wrong!',
             timer: 1500
+          }).fire({
+            type: 'error',
+            title: 'Wrong Answer'
           })
         }
         availableQuestions = availableQuestions.filter(question => question !== availableQuestions[randomQuestion])
         if (availableQuestions.length === 0) {
           console.log('end of the game')
+          Swal.fire({
+            type: 'info',
+            confirmButtonText: 'New Game',
+            title: 'Finished quiz game',
+            text: `Your final score is: ${parseInt(score.innerHTML.match(/(\d)/)[0])}`,
+            preConfirm: () => {
+              location.reload()
+            }
+          })
         } else {
           setTimeout(() => {
             getQuestion()
