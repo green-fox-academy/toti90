@@ -1,5 +1,7 @@
 `use strict`;
 
+const Swal = require('sweetalert2')
+
 require('dotenv').config();
 const express = require('express');
 const PORT = 3000;
@@ -127,3 +129,5 @@ app.delete('/api/questions/:id', (req, res) => {
 })
 
 app.listen(PORT, () => { console.log(`App listen to port: ${PORT}`) })
+
+module.exports = Swal;

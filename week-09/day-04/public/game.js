@@ -1,5 +1,6 @@
 `use strict`;
 
+
 const main = document.querySelector('.main-container')
 const questionDiv = document.querySelector('.question-container')
 const questionLabel = document.querySelector('h2')
@@ -7,7 +8,6 @@ const answerBtns = document.querySelectorAll('button')
 const score = document.querySelector('h1')
 
 let availableQuestions = []
-
 
 window.onload = () => {
   let httpRequest = new XMLHttpRequest();
@@ -24,8 +24,6 @@ window.onload = () => {
 function getQuestion() {
   let httpRequest = new XMLHttpRequest();
   let randomQuestion = Math.floor(Math.random() * availableQuestions.length)
-  console.log(availableQuestions)
-  console.log(availableQuestions[randomQuestion])
   answerBtns.forEach((button) => {
     button.classList.remove('correct'); button.classList.remove('incorrect');
     button.classList.add('default')
@@ -46,8 +44,22 @@ function getQuestion() {
           event.target.classList.add('correct')
           let scoreValue = parseInt(score.innerHTML.match(/(\d)/)[0]) + 1
           score.innerHTML = `SCORE: ${scoreValue++}`
+          Swal.fire({
+            type: 'success',
+            title: 'YEAHH',
+            text: 'Right Answer!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
           event.target.classList.add('incorrect')
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            text: 'Something went wrong!',
+            timer: 1500
+          })
         }
         availableQuestions = availableQuestions.filter(question => question !== availableQuestions[randomQuestion])
         if (availableQuestions.length === 0) {
@@ -55,11 +67,10 @@ function getQuestion() {
         } else {
           setTimeout(() => {
             getQuestion()
-          }, 1000)
+          }, 1500)
         }
       }
     })
   }
   httpRequest.send();
-
 }
