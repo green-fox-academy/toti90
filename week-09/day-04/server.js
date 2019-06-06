@@ -1,7 +1,5 @@
 `use strict`;
 
-const Swal = require('sweetalert2')
-
 require('dotenv').config();
 const express = require('express');
 const PORT = 3000;
@@ -61,7 +59,7 @@ app.get('/api/game/:id', (req, res) => {
 })
 
 app.get('/api/questions', (req, res) => {
-  conn.query('SELECT * FROM questions', (err, rows) => {
+  conn.query('SELECT id, question FROM questions', (err, rows) => {
     if (err) {
       res.status(400).send('Database select error on questions')
     }
@@ -129,5 +127,3 @@ app.delete('/api/questions/:id', (req, res) => {
 })
 
 app.listen(PORT, () => { console.log(`App listen to port: ${PORT}`) })
-
-module.exports = Swal;

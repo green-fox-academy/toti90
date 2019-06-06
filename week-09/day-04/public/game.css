@@ -1,23 +1,79 @@
 body {
   background-color: #EBF0F1;
+  font-family: 'Lato', sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+h1 {
+  font-size: 2.5em;
+  height: 50px;
+}
+
+
+h2 {
+  padding: 30px;
+  text-align: center;
+}
+
+.question-container {
+  width: 70%;
+  height: 70%;
+  background-color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 5px 10px rgb(211, 210, 210);
+  font-weight: 100;
+  margin-bottom: 20px;
+  border-radius: 20px;
+
+}
+
+button {
+  width: 80%;
+  height: 50px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #0260E8;
+  font-size: 18px;
+  color: white;
+  letter-spacing: 1.5px;
+  border-radius: 5px;
+  box-shadow: 1px 3px 3px grey;
+  outline: none;
 }
 
 .correct {
-  background-color: green;
+  background-color: #00CF91;
 }
 
 .incorrect {
-  background-color: red;
+  background-color: #F85C50;
 }
 
 #myProgress {
-  width: 200px;
-  background-color: grey;
+  width: 100%;
+  background-color: rgb(231, 252, 228);
   margin: 40px 0 40px 20px;
+  border-radius: 10px;
 }
 
 #myBar {
   width: 0%;
   height: 30px;
-  background-color: green;
+  background-color: #41B619;
+  border-radius: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #64C7FF;
+  font-size: 18px;
 }
