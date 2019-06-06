@@ -6,6 +6,8 @@ const questionDiv = document.querySelector('.question-container')
 const questionLabel = document.querySelector('h2')
 const answerBtns = document.querySelectorAll('button')
 const score = document.querySelector('h1')
+var bar1 = document.querySelector('.ldBar');
+bar1.dataset.value = '80';
 
 let availableQuestions = []
 
