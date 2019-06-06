@@ -33,8 +33,8 @@ app.get('/questions', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/questions.html'))
 })
 
-app.get('/api/game', (req, res) => {
-  conn.query('SELECT * FROM questions', (err, rows) => {
+app.get('/api/game/:id', (req, res) => {
+  conn.query('SELECT * FROM questions WHERE id=?', [req.params.id], (err, rows) => {
     if (err) {
       res.status(400).send('Database select error on questions')
     } else if (rows.length !== 0) {
@@ -62,6 +62,15 @@ app.get('/api/questions', (req, res) => {
   conn.query('SELECT * FROM questions', (err, rows) => {
     if (err) {
       res.status(400).send('Database select error on questions')
+    }
+    res.status(200).send(rows)
+  })
+})
+
+app.get('/api/questionsNumber', (req, res) => {
+  conn.query('SELECT id FROM questions', (err, rows) => {
+    if (err) {
+      res.status(400).send('SELECT question number error')
     }
     res.status(200).send(rows)
   })
