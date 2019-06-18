@@ -1,0 +1,12 @@
+City: <input type="text" [(ngModel)]="cityName" required>
+<button (click)="search()">Search</button>
+<div class="main">
+  <div *ngIf="city" class="dash">
+    <div>
+    <a href="" class="citylink">{{city.name}}</a>
+    <br>{{city.country}}
+  </div>
+    <div class="temp">{{city.temperature}}</div>
+    <div><img src="/assets/{{city.icon}}.png" class="img" alt=""></div>
+  </div>
+</div>
