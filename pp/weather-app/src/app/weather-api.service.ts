@@ -26,12 +26,14 @@ export class WeatherApiService {
     .subscribe(response => {
       this.citySource.next(new City(response["name"], response["sys"]["country"], 
       `${Math.round(response["main"]["temp"] - 273)} °C`, 
-      `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`))
-      this.currentCity.subscribe(data => this.getDetails(data.name))
+      `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`,
+      this.getDetails(response["name"])
+      ))
     })
   }
 
-  getDetails(cityName: String) {
+  getDetails(cityName: String):String[][] {
+    let result: String[][] = []
     this.http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${this.env.apiKey}`)
     .subscribe(response => {
       for (let i=0;i<response["list"].length;i+=8) {
@@ -41,10 +43,11 @@ export class WeatherApiService {
           day.push(`http://openweathermap.org/img/w/${forecast["weather"][0]["icon"]}.png`)
           day.push(`${Math.round(forecast["main"]["temp"] - 273)} °C`)
           day.push(`${forecast["weather"][0]["description"]}`)
-          data.forecast.push(day)
+          result.push(day)
         })
       }
     })
+    return result
   }
 
   
