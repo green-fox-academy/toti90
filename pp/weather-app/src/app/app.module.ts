@@ -9,12 +9,14 @@ import { TilesComponent } from './tiles/tiles.component';
 import { EnvServiceProvider } from './env.service.provider';
 import { WeatherApiService } from './weather-api.service';
 import { SearchComponent } from './search/search.component';
+import { DetailViewComponent } from './detail-view/detail-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TilesComponent,
-    SearchComponent
+    SearchComponent,
+    DetailViewComponent
   ],
   imports: [
     BrowserModule,

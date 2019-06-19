@@ -1,0 +1,39 @@
+.mainD {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 350px;
+  width: 900px;
+}
+
+.detail {
+  background-color: white;
+  width: 150px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px #888888;
+  margin-top: 50px;
+}
+
+.tempD {
+  font-family: Lato;
+  color:rgb(0, 0, 68);
+  font-size: 20px;
+  font-weight: 400;
+  
+}
+
+.message {
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.cityName {
+  position: absolute;
+  top:0px;
+  left:20px;
+}

@@ -1,0 +1,9 @@
+<div *ngIf="city" class="mainD">
+    <div *ngFor="let row of city.forecast" class="detail">
+        <img src="{{row[0]}}" class="img">
+        <div class="tempD">{{row[1]}}</div>
+        <div class="message">{{row[2]}}</div>
+  </div>
+</div>
+
+

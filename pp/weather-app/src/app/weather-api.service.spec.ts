@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule} from '@angular/common/http/testing'
 import { WeatherApiService } from './weather-api.service';
 
-describe('WeatherApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+fdescribe('WeatherApiService', () => {
 
-  it('should be created', () => {
-    const service: WeatherApiService = TestBed.get(WeatherApiService);
-    expect(service).toBeTruthy();
+let service: WeatherApiService
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule],
+    providers: [WeatherApiService]
   });
+  service = TestBed.get(WeatherApiService)
+  })
 });

@@ -14,15 +14,11 @@ export class WeatherApiService {
   private citySource = new BehaviorSubject<City>(this.city)
   currentCity = this.citySource.asObservable()
 
+
   constructor(
     private http: HttpClient,
     private env: EnvService) {
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=Budapest&APPID=${this.env.apiKey}`)
-    .subscribe(response => {
-      this.citySource.next(new City(response["name"], response["sys"]["country"], 
-      `${Math.round(response["main"]["temp"] - 273)} °C`, 
-      `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`))
-    })
+    this.changeCity("Budapest")
     }
 
   changeCity(cityName: String) {
@@ -31,6 +27,23 @@ export class WeatherApiService {
       this.citySource.next(new City(response["name"], response["sys"]["country"], 
       `${Math.round(response["main"]["temp"] - 273)} °C`, 
       `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`))
+      this.currentCity.subscribe(data => this.getDetails(data.name))
+    })
+  }
+
+  getDetails(cityName: String) {
+    this.http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${this.env.apiKey}`)
+    .subscribe(response => {
+      for (let i=0;i<response["list"].length;i+=8) {
+        let forecast = response["list"][i]
+        this.currentCity.subscribe(data => {
+          let day: String[] = []
+          day.push(`http://openweathermap.org/img/w/${forecast["weather"][0]["icon"]}.png`)
+          day.push(`${Math.round(forecast["main"]["temp"] - 273)} °C`)
+          day.push(`${forecast["weather"][0]["description"]}`)
+          data.forecast.push(day)
+        })
+      }
     })
   }
 
