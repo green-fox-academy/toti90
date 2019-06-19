@@ -16,8 +16,9 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  search() {
-    this.apiWeather.getApiObserve(this.cityName)
+  change() {
+    this.apiWeather.changeCity(this.cityName)
+    this.cityName=""
   }
 
 }

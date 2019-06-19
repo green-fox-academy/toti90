@@ -19,14 +19,18 @@ export class WeatherApiService {
     private env: EnvService) {
     this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=Budapest&APPID=${this.env.apiKey}`)
     .subscribe(response => {
-      this.citySource.next(new City(response["name"], response["sys"]["country"], `${Math.round(response["main"]["temp"] - 273)} °C`, "cloudy"))
+      this.citySource.next(new City(response["name"], response["sys"]["country"], 
+      `${Math.round(response["main"]["temp"] - 273)} °C`, 
+      `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`))
     })
     }
 
-  getApiObserve(cityName: String) {
+  changeCity(cityName: String) {
     this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this.env.apiKey}`)
     .subscribe(response => {
-      this.citySource.next(new City(response["name"], response["sys"]["country"], `${Math.round(response["main"]["temp"] - 273)} °C`, "cloudy"))
+      this.citySource.next(new City(response["name"], response["sys"]["country"], 
+      `${Math.round(response["main"]["temp"] - 273)} °C`, 
+      `http://openweathermap.org/img/w/${response["weather"][0]["icon"]}.png`))
     })
   }
 

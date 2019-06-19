@@ -1,2 +1,2 @@
 City: <input type="text" [(ngModel)]="cityName">
-<button (click)="search()">Search</button>
+<button (click)="change()" [disabled]="!cityName.length">Search</button>
