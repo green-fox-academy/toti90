@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -7,11 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TilesComponent } from './tiles/tiles.component';
 import { EnvServiceProvider } from './env.service.provider';
+import { WeatherApiService } from './weather-api.service';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TilesComponent
+    TilesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,7 @@ import { EnvServiceProvider } from './env.service.provider';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [EnvServiceProvider],
+  providers: [EnvServiceProvider,WeatherApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

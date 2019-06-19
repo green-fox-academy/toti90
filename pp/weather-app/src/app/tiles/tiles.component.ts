@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { City } from './city.model';
 import { HttpClient } from '@angular/common/http';
+import { EnvService } from '../env.service';
+import { WeatherApiService } from '../weather-api.service';
 
 @Component({
   selector: 'app-tiles',
@@ -8,26 +10,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./tiles.component.css']
 })
 export class TilesComponent implements OnInit {
+
   city: City
-  cityName: String = "" 
 
   constructor(
-    private http: HttpClient) {
+    private http: HttpClient,
+    private env: EnvService,
+    private apiWeather: WeatherApiService) {
   }
   ngOnInit() {
-    this.http.get('https://api.openweathermap.org/data/2.5/weather?q=Budapest&APPID=100cb1887e2abc22cbc5d54fc670e448')
-    .subscribe((response)=>{
-      this.city = new City (response["name"], response["sys"]["country"], `${Math.round(response["main"]["temp"]-273)} °C`, "cloudy")
-    })
+    this.apiWeather.currentCity.subscribe(city => this.city=city)
   }
-
-  search() {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.cityName}&APPID=100cb1887e2abc22cbc5d54fc670e448`)
-      .subscribe((response)=>{
-        this.city = new City (response["name"], response["sys"]["country"], `${Math.round(response["main"]["temp"]-273)} °C`, "cloudy")
-      })
-  }
-
-  
 
 }
