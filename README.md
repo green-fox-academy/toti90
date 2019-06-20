@@ -9,3 +9,4 @@
 1. [Tictac-syllabus](https://github.com/green-fox-academy/tictac-syllabus)
 2. [Tictac-wiki](https://github.com/green-fox-academy/tictac-syllabus/wiki)
 3. [Tictac-calendar](https://calendar.google.com/calendar/embed?src=greenfoxacademy.com_1bvhic9im8cho9l3juao3nv9bg%40group.calendar.google.com&ctz=Europe%2FBudapest)
+4. [Jade-Calendar](https://calendar.google.com/calendar/embed?src=greenfoxacademy.com_mjmer4p21p4o5cqjal4k78tvf8%40group.calendar.google.com&ctz=Europe%2FBudapest)
